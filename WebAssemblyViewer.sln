@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.36
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAssemblyViewer", "WebAssemblyViewer\WebAssemblyViewer.csproj", "{E1AD99E6-0871-4ED9-9323-4BF2D41A8AE3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1AD99E6-0871-4ED9-9323-4BF2D41A8AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1AD99E6-0871-4ED9-9323-4BF2D41A8AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1AD99E6-0871-4ED9-9323-4BF2D41A8AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1AD99E6-0871-4ED9-9323-4BF2D41A8AE3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {82500BD8-5D56-4BFF-A0A7-CEB04319B3A3}
+	EndGlobalSection
+EndGlobal
