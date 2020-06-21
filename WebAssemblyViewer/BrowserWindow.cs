@@ -1,23 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using CoreWindowsWrapper;
 using Diga.NativeControls.WebBrowser;
 using Diga.WebView2.Wrapper.EventArguments;
 
 namespace WebAssemblyViewer
 {
-
     class BrowserWindow:NativeWindow
     {
         private NativeWebBrowser _Browser;
         private BrowserOpetions _Options;
-        private const string ParamTable = "<table style=\"font-size:20; border-color:blue;background-color:ghostwhite;\"><thead style=\"text-align:left; background-color:gainsboro;\"><tr><th>Parameter</th><th>Description</th></tr></thead><tbody><tr><td>/me</td><td>Enables Monitoring</td></tr><tr><td>/mu:&lt;url&gt;</td><td>Monitoring-Url<br>The url for testing while monitoring!</td></tr><tr><td>/mf:&lt;Folder&gt;</td><td>Monitoring-Folder-Path<br>path to the Folder contining Html-Content</td></tr><tr><td>/t:&lt;title&gt</td><td>Tile shown in the Window - Head</td></tr><tr><td>/sb</td><td>enables the Statusbar option of the Browser</td></tr><tr><td>/dt</td><td>Enables Dev-Tools F12</td></tr><tr><td>/cm</td><td>endables Context-Menu</td></tr><tr><td>/nu:&lt;url&gt;</td><td>Url to navigate to</td></tr></tbody></table>";
+        private const string ParamTable = "";//"<table style=\"font-size:20; border-color:blue;background-color:ghostwhite;\"><thead style=\"text-align:left; background-color:gainsboro;\"><tr><th>Parameter</th><th>Description</th></tr></thead><tbody><tr><td>/me</td><td>Enables Monitoring</td></tr><tr><td>/mu:&lt;url&gt;</td><td>Monitoring-Url<br>The url for testing while monitoring!</td></tr><tr><td>/mf:&lt;Folder&gt;</td><td>Monitoring-Folder-Path<br>path to the Folder contining Html-Content</td></tr><tr><td>/t:&lt;title&gt</td><td>Tile shown in the Window - Head</td></tr><tr><td>/sb</td><td>enables the Statusbar option of the Browser</td></tr><tr><td>/dt</td><td>Enables Dev-Tools F12</td></tr><tr><td>/cm</td><td>endables Context-Menu</td></tr><tr><td>/nu:&lt;url&gt;</td><td>Url to navigate to</td></tr></tbody></table>";
         private const string ParamErrorHead = "<h1>Prameter Error</h1>";
         private const string ParamErrorMonitoringUrl = "<h3>The Monitorin-Url (/mu) must be Set<br>and must start with<br>http://<br>or https://<br>or file://</h3>";
         private const string ParamErrorUrl = "<h3>The Url (/nu) must be Set when you defind the Parameter /nu <br>and must start with<br>http://<br>or https://<br>or file://</h3>";

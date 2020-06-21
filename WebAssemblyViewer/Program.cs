@@ -1,28 +1,96 @@
 ﻿using CoreWindowsWrapper;
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace WebAssemblyViewer
 {
+    class ArgOptions
+    {
+        private Dictionary<string,string> _Args;
+
+        public ArgOptions(Dictionary<string,string> args)
+        {
+            this._Args = args;
+            
+        }
+
+        public bool ContainsHelp
+        {
+            get => this._Args.ContainsKey("/?");
+        }
+
+        public bool ContainsConfigFilePath
+        {
+            get => this._Args.ContainsKey("/f");
+        }
+
+        public string ConfigFilePath
+        {
+            get => this._Args["/f"];
+        }
+
+        public bool ContainsEdit
+        {
+            get => this._Args.ContainsKey("/e");
+        }
+    }
     static class Program
     {
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+
+            string configFile = "WebAssemblyViewer.cfg";
+
+
+            ArgOptions argOptions = GetOptions(args);
+
+            if (argOptions.ContainsHelp)
+            {
+                MessageBox.Show(IntPtr.Zero,"Parameter:\n\n/f:<Path>\tset the path to config-file\n/e \t\topens the Config Editor!\n/?\t\tHelp\n\nExample:\n\nWebAssemblyViewer.exe /f:c:\\tmp\\config.cfg\n\n","Parameters",MessageBoxOptions.OkOnly | MessageBoxOptions.IconInformation);
+                return;
+            }
+
+            if (argOptions.ContainsConfigFilePath)
+            {
+                configFile = argOptions.ConfigFilePath;
+                FileInfo fi = new FileInfo(configFile);
+                if (fi.Directory == null || !fi.Directory.Exists)
+                {
+                    MessageBox.Show("The directory of config-File cannot be found!");
+                    return;
+                }
+
+            }
+
+
             BrowserOpetions opetions;
-            if(!LoadOptions("WebAssemblyViewer.cfg",out opetions))
+            if(!LoadOptions(configFile,out opetions))
             {
                 opetions = GetDefaultOptions();
-                if(WriteOptions("WebAssemblyViewer.cfg", opetions))
+                if(WriteOptions(configFile, opetions))
                 {
-                    MessageBoxResult result = MessageBox.Show(IntPtr.Zero, "The Application created a configuration - file = (WebAssemblyViewer.cfg)\nDo you want to continue with emtyp configuration file?", "Config file created!", MessageBoxOptions.YesNo | MessageBoxOptions.IconQuestion | MessageBoxOptions.DefButton2);
-                    if (result == MessageBoxResult.No)
-                        return;
+                    if (!argOptions.ContainsEdit)
+                    {
+                        MessageBoxResult result = MessageBox.Show(IntPtr.Zero, "The Application created a configuration - file = (WebAssemblyViewer.cfg)\nDo you want to continue with emtyp configuration file?", "Config file created!", MessageBoxOptions.YesNo | MessageBoxOptions.IconQuestion | MessageBoxOptions.DefButton2);
+                        if (result == MessageBoxResult.No)
+                            return;
+                    }
                 }
             }
+
+            if (argOptions.ContainsEdit)
+            {
+                EditWindow ew = new EditWindow();
+                NativeApp.Run(ew);
+                return;
+            }
+
             BrowserWindow bw = new BrowserWindow(opetions);
             NativeApp.Run(bw);
         }
@@ -68,6 +136,19 @@ namespace WebAssemblyViewer
                 retVal = false;
             }
             return retVal;
+        }
+
+
+        static ArgOptions GetOptions(string[] args)
+        {
+            Dictionary<string, string> retval = args.ToDictionary(
+                k => k.Split(new[] { ':' }, 2)[0].ToLower(),
+                v => v.Split(new[] { ':' }, 2).Count() > 1 
+                    ? v.Split(new[] { ':' }, 2)[1] 
+                    : null);
+
+            ArgOptions ops = new ArgOptions(retval);
+            return ops;
         }
     }
 
