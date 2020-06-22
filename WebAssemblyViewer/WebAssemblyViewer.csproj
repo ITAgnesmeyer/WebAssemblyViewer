@@ -66,6 +66,7 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppMessageBox.cs" />
     <Compile Include="BrowserOpetions.cs" />
     <Compile Include="BrowserWindow.cs" />
     <Compile Include="EditWindow.cs" />

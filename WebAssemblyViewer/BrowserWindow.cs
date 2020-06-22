@@ -31,12 +31,15 @@ namespace WebAssemblyViewer
             this.Width = 800;
             this.Height = 600;
             this.StartUpPosition = WindowsStartupPosition.CenterScreen;
+            this.IconFile = "App.ico";
             this._Browser = new NativeWebBrowser
             {
                 Width = this.Width,
                 Height = this.Height,
                 DefaultContextMenusEnabled = false,
                 DevToolsEnabled = false
+                
+                
             };
 
             this._Browser.WebViewCreated += OnWebWindowCreated;

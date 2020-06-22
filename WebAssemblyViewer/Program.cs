@@ -3,11 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using Diga.Core.Api.Win32;
+using System.Threading;
 
 namespace WebAssemblyViewer
 {
     class ArgOptions
     {
+       
+
         private Dictionary<string,string> _Args;
 
         public ArgOptions(Dictionary<string,string> args)
@@ -38,6 +43,20 @@ namespace WebAssemblyViewer
     }
     static class Program
     {
+
+        [DllImport("user32.dll", EntryPoint = "MessageBox", SetLastError = true, CharSet = CharSet.Unicode)]
+        private static extern uint MessageBoxUC(IntPtr hwnd,
+            string text,
+            string title,
+            uint type);
+
+        [DllImport("user32.dll", EntryPoint = "MessageBox", SetLastError = true, CharSet = CharSet.Ansi)]
+        private static extern uint MessageBoxAC(IntPtr hwnd,
+            string text,
+            string title,
+            uint type);
+
+
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
         /// </summary>
@@ -47,7 +66,7 @@ namespace WebAssemblyViewer
 
             string configFile = "WebAssemblyViewer.cfg";
 
-
+       
             ArgOptions argOptions = GetOptions(args);
 
             if (argOptions.ContainsHelp)
@@ -86,9 +105,30 @@ namespace WebAssemblyViewer
 
             if (argOptions.ContainsEdit)
             {
-                EditWindow ew = new EditWindow();
+                
+                EditWindow ew = new EditWindow(opetions);
                 NativeApp.Run(ew);
-                return;
+               
+                
+                if (ew.Result)
+                {
+                    if (WriteOptions(configFile, opetions))
+                    {
+
+                        AppMessageBox mg = new AppMessageBox();
+                        mg.Caption = "Continue?";
+                        mg.Message =
+                            "The configuration has been saved.\nDo you want to start the App?\nClick Ok to start the Applicaiton.";
+                        NativeApp.Run(mg);
+                        var result = mg.Result;
+                        if (result == MessageBoxResult.Cancel)
+                        {
+                            return;
+                        }
+
+                    }
+                }
+                
             }
 
             BrowserWindow bw = new BrowserWindow(opetions);
