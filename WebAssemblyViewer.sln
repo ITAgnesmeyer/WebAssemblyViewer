@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30128.36
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAssemblyViewer", "WebAssemblyViewer\WebAssemblyViewer.csproj", "{E1AD99E6-0871-4ED9-9323-4BF2D41A8AE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAssemblyViewerCore", "WebAssemblyViewerCore\WebAssemblyViewerCore.csproj", "{3BBD7743-5673-4D6C-BC59-7E36567B78F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E1AD99E6-0871-4ED9-9323-4BF2D41A8AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1AD99E6-0871-4ED9-9323-4BF2D41A8AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1AD99E6-0871-4ED9-9323-4BF2D41A8AE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BBD7743-5673-4D6C-BC59-7E36567B78F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BBD7743-5673-4D6C-BC59-7E36567B78F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BBD7743-5673-4D6C-BC59-7E36567B78F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BBD7743-5673-4D6C-BC59-7E36567B78F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

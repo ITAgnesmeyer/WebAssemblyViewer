@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\WebAssemblyViewer\AppMessageBox.cs" Link="AppMessageBox.cs" />
+    <Compile Include="..\WebAssemblyViewer\ArgOptions.cs" Link="ArgOptions.cs" />
+    <Compile Include="..\WebAssemblyViewer\BrowserOpetions.cs" Link="BrowserOpetions.cs" />
+    <Compile Include="..\WebAssemblyViewer\BrowserWindow.cs" Link="BrowserWindow.cs" />
+    <Compile Include="..\WebAssemblyViewer\EditWindow.cs" Link="EditWindow.cs" />
+    <Compile Include="..\WebAssemblyViewer\Program.cs" Link="Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CoreWindowsWrapper" Version="1.0.43" />
+    <PackageReference Include="Diga.NativeControls.WebBrowser" Version="1.0.0" />
+    <PackageReference Include="Diga.WebView2.Wrapper" Version="2.0.4" />
+    <PackageReference Include="EasyXMLSerializer" Version="1.0.8" />
+  </ItemGroup>
+
+</Project>

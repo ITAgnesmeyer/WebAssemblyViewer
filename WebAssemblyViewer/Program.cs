@@ -4,57 +4,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Diga.Core.Api.Win32;
-using System.Threading;
 
 namespace WebAssemblyViewer
 {
-    class ArgOptions
-    {
-       
-
-        private Dictionary<string,string> _Args;
-
-        public ArgOptions(Dictionary<string,string> args)
-        {
-            this._Args = args;
-            
-        }
-
-        public bool ContainsHelp
-        {
-            get => this._Args.ContainsKey("/?");
-        }
-
-        public bool ContainsConfigFilePath
-        {
-            get => this._Args.ContainsKey("/f");
-        }
-
-        public string ConfigFilePath
-        {
-            get => this._Args["/f"];
-        }
-
-        public bool ContainsEdit
-        {
-            get => this._Args.ContainsKey("/e");
-        }
-    }
     static class Program
     {
 
-        [DllImport("user32.dll", EntryPoint = "MessageBox", SetLastError = true, CharSet = CharSet.Unicode)]
-        private static extern uint MessageBoxUC(IntPtr hwnd,
-            string text,
-            string title,
-            uint type);
 
-        [DllImport("user32.dll", EntryPoint = "MessageBox", SetLastError = true, CharSet = CharSet.Ansi)]
-        private static extern uint MessageBoxAC(IntPtr hwnd,
-            string text,
-            string title,
-            uint type);
 
 
         /// <summary>
@@ -98,7 +54,19 @@ namespace WebAssemblyViewer
                     {
                         MessageBoxResult result = MessageBox.Show(IntPtr.Zero, "The Application created a configuration - file = (WebAssemblyViewer.cfg)\nDo you want to continue with emtyp configuration file?", "Config file created!", MessageBoxOptions.YesNo | MessageBoxOptions.IconQuestion | MessageBoxOptions.DefButton2);
                         if (result == MessageBoxResult.No)
-                            return;
+                        {
+                            result = MessageBox.Show(IntPtr.Zero, "Do you want to Edit the Cofig-File?",
+                                "Want to edit Config-File?", MessageBoxOptions.OkOnly | MessageBoxOptions.YesNo);
+                            if (result == MessageBoxResult.Yes)
+                            {
+                                argOptions.ContainsEdit = true;
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+                           
                     }
                 }
             }

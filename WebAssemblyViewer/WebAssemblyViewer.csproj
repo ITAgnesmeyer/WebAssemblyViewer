@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CoreWindowsWrapper, Version=1.0.4.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CoreWindowsWrapper.1.0.43\lib\net472\CoreWindowsWrapper.dll</HintPath>
@@ -67,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppMessageBox.cs" />
+    <Compile Include="ArgOptions.cs" />
     <Compile Include="BrowserOpetions.cs" />
     <Compile Include="BrowserWindow.cs" />
     <Compile Include="EditWindow.cs" />
@@ -95,6 +99,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Diga.WebView2.Wrapper.2.0.4\build\Diga.WebView2.Wrapper.targets" Condition="Exists('..\packages\Diga.WebView2.Wrapper.2.0.4\build\Diga.WebView2.Wrapper.targets')" />
