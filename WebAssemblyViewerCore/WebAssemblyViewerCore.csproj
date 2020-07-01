@@ -3,7 +3,13 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>WebAssemblyViewer</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="App.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\WebAssemblyViewer\AppMessageBox.cs" Link="AppMessageBox.cs" />
@@ -11,7 +17,14 @@
     <Compile Include="..\WebAssemblyViewer\BrowserOpetions.cs" Link="BrowserOpetions.cs" />
     <Compile Include="..\WebAssemblyViewer\BrowserWindow.cs" Link="BrowserWindow.cs" />
     <Compile Include="..\WebAssemblyViewer\EditWindow.cs" Link="EditWindow.cs" />
+    <Compile Include="..\WebAssemblyViewer\NativeTextBoxEx.cs" Link="NativeTextBoxEx.cs" />
     <Compile Include="..\WebAssemblyViewer\Program.cs" Link="Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="App.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

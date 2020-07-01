@@ -1,19 +1,17 @@
 ﻿using CoreWindowsWrapper;
-using CoreWindowsWrapper.Tools;
 using Diga.Core.Api.Win32;
 using System;
-using System.Runtime.CompilerServices;
 
 namespace WebAssemblyViewer
 {
     class EditWindow : NativeWindow
     {
         private NativeCheckBox _ChkMonitoring;
-        private NativeTextBox _TxtMonitoriingUlr;
-        private NativeTextBox _TxtTitle;
+        private NativeTextBoxEx _TxtMonitoriingUlr;
+        private NativeTextBoxEx _TxtTitle;
         private NativeCheckBox _ChkStatusBar;
-        private NativeTextBox _TxtMonitoringPath;
-        private NativeTextBox _TxtUrl;
+        private NativeTextBoxEx _TxtMonitoringPath;
+        private NativeTextBoxEx _TxtUrl;
         private NativeCheckBox _ChkDevTools;
         private NativeCheckBox _ChkContextMenu;
         private NativeButton _BnSelectMonitoringPath;
@@ -107,7 +105,7 @@ namespace WebAssemblyViewer
                 BackColor = this.BackColor
             };
 
-            this._TxtTitle = new NativeTextBox
+            this._TxtTitle = new NativeTextBoxEx
             {
                 Location = new Point(rightLeft, top),
                 Width = 300,
@@ -128,7 +126,7 @@ namespace WebAssemblyViewer
                 BackColor = this.BackColor
             };
 
-            this._TxtUrl = new NativeTextBox
+            this._TxtUrl = new NativeTextBoxEx
             {
                 Location = new Point(rightLeft, top),
                 Width = 300,
@@ -156,7 +154,7 @@ namespace WebAssemblyViewer
                 BackColor= this.BackColor
 
             };
-            this._TxtMonitoriingUlr = new NativeTextBox
+            this._TxtMonitoriingUlr = new NativeTextBoxEx
             {
                 Location=new Point(rightLeft,top),
                 Width = 300,
@@ -176,7 +174,7 @@ namespace WebAssemblyViewer
                 BackColor = this.BackColor
             };
 
-            this._TxtMonitoringPath = new NativeTextBox
+            this._TxtMonitoringPath = new NativeTextBoxEx
             {
                 Location = new Point(rightLeft, top),
                 Width = 300,

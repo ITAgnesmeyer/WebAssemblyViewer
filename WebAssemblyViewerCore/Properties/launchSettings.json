@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WebAssemblyViewerCore": {
+      "commandName": "Project",
+      "commandLineArgs": "/e"
+    }
+  }
+}
