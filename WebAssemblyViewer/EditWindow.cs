@@ -7,11 +7,11 @@ namespace WebAssemblyViewer
     class EditWindow : NativeWindow
     {
         private NativeCheckBox _ChkMonitoring;
-        private NativeTextBoxEx _TxtMonitoriingUlr;
-        private NativeTextBoxEx _TxtTitle;
+        private NativeTextBox _TxtMonitoriingUlr;
+        private NativeTextBox _TxtTitle;
         private NativeCheckBox _ChkStatusBar;
-        private NativeTextBoxEx _TxtMonitoringPath;
-        private NativeTextBoxEx _TxtUrl;
+        private NativeTextBox _TxtMonitoringPath;
+        private NativeTextBox _TxtUrl;
         private NativeCheckBox _ChkDevTools;
         private NativeCheckBox _ChkContextMenu;
         private NativeButton _BnSelectMonitoringPath;
@@ -105,7 +105,7 @@ namespace WebAssemblyViewer
                 BackColor = this.BackColor
             };
 
-            this._TxtTitle = new NativeTextBoxEx
+            this._TxtTitle = new NativeTextBox
             {
                 Location = new Point(rightLeft, top),
                 Width = 300,
@@ -126,7 +126,7 @@ namespace WebAssemblyViewer
                 BackColor = this.BackColor
             };
 
-            this._TxtUrl = new NativeTextBoxEx
+            this._TxtUrl = new NativeTextBox
             {
                 Location = new Point(rightLeft, top),
                 Width = 300,
@@ -154,7 +154,7 @@ namespace WebAssemblyViewer
                 BackColor= this.BackColor
 
             };
-            this._TxtMonitoriingUlr = new NativeTextBoxEx
+            this._TxtMonitoriingUlr = new NativeTextBox
             {
                 Location=new Point(rightLeft,top),
                 Width = 300,
@@ -174,7 +174,7 @@ namespace WebAssemblyViewer
                 BackColor = this.BackColor
             };
 
-            this._TxtMonitoringPath = new NativeTextBoxEx
+            this._TxtMonitoringPath = new NativeTextBox
             {
                 Location = new Point(rightLeft, top),
                 Width = 300,
