@@ -1,5 +1,6 @@
 # WebAssemblyViewer
-Application to Show WebAssembly-Sites without a Web-Server
+Application to Show WebAssembly-Sites without a Web-Server.
+
 The Application creates a config-File.
 
 ```xml
