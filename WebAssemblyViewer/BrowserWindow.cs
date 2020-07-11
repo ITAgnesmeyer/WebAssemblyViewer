@@ -20,7 +20,8 @@ namespace WebAssemblyViewer
         {
             this._Options = options;
             this.Text = options.Title;
-       
+            this._Browser.BrowserUserDataFolder = options.BrowserUserDataFolder;
+            this._Browser.BrowserExecutableFolder = options.BrowserExecutableFolder;
         }
        
         protected override void InitControls()
@@ -32,18 +33,17 @@ namespace WebAssemblyViewer
             this.Height = 600;
             this.StartUpPosition = WindowsStartupPosition.CenterScreen;
             this.IconFile = "App.ico";
+           
+
             this._Browser = new NativeWebBrowser
             {
                 Width = this.Width,
                 Height = this.Height,
                 DefaultContextMenusEnabled = false,
                 DevToolsEnabled = false,
-                AutoDock = true,
-                BrowserUserDataFolder = "c:\\tmp"
-                
-                
+                AutoDock = true
             };
-
+            
             this._Browser.WebViewCreated += OnWebWindowCreated;
             this._Browser.ProcessFailed += OnProcessFailed;
             this._Browser.ContentLoading += OnContentLoading;
@@ -128,7 +128,7 @@ namespace WebAssemblyViewer
             this._Browser.IsStatusBarEnabled = this._Options.StatusBar;
             this._Browser.MonitoringFolder = this._Options.MonitoringPath;
             this._Browser.MonitoringUrl = this._Options.MointoringUrl;
-
+            
 
             this._Browser.EnableMonitoring = this._Options.Monitoring;
             if(!TestUrl(this._Options.Url))

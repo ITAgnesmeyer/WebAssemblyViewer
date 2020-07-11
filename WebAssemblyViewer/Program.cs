@@ -115,6 +115,8 @@ namespace WebAssemblyViewer
                 StatusBar = true,
                 DevToolsEnable = true,
                 ContextMenuEnable = true,
+                BrowserUserDataFolder = "",
+                BrowserExecutableFolder=""
             };
     }
 

@@ -8,6 +8,10 @@ namespace WebAssemblyViewer
     {
         private NativeCheckBox _ChkMonitoring;
         private NativeTextBox _TxtMonitoriingUlr;
+        private NativeTextBox _TxtUserDataFolder;
+        private NativeButton _BnSelectUserDataFolder;
+        private NativeTextBox _TxtBrowserExecutable;
+        private NativeButton _BnSelectBrowserExecutable;
         private NativeTextBox _TxtTitle;
         private NativeCheckBox _ChkStatusBar;
         private NativeTextBox _TxtMonitoringPath;
@@ -36,6 +40,8 @@ namespace WebAssemblyViewer
             this._Options.DevToolsEnable = this._ChkDevTools.Checked;
             this._Options.ContextMenuEnable = this._ChkContextMenu.Checked;
             this._Options.StatusBar = this._ChkStatusBar.Checked;
+            this._Options.BrowserUserDataFolder = this._TxtUserDataFolder.Text;
+            this._Options.BrowserExecutableFolder = this._TxtBrowserExecutable.Text;
 
         }
         private void OptionsToView()
@@ -43,6 +49,8 @@ namespace WebAssemblyViewer
             this._ChkMonitoring.Checked = this._Options.Monitoring;
             this._TxtMonitoriingUlr.Text = this._Options.MointoringUrl;
             this._TxtMonitoringPath.Text = this._Options.MonitoringPath;
+            this._TxtUserDataFolder.Text = this._Options.BrowserUserDataFolder;
+            this._TxtBrowserExecutable.Text = this._Options.BrowserExecutableFolder;
             this._TxtTitle.Text = this._Options.Title;
             this._TxtUrl.Text = this._Options.Url;
             this._ChkDevTools.Checked = this._Options.DevToolsEnable;
@@ -58,7 +66,7 @@ namespace WebAssemblyViewer
         {
             this.Text = "Configuration Editor";
             this.Width = 500;
-            this.Height = 400;
+            this.Height = 430;
             this.StartUpPosition = WindowsStartupPosition.CenterScreen;
 
             int top = 10;
@@ -135,7 +143,62 @@ namespace WebAssemblyViewer
             };
             this._TxtUrl.Style |= WindowStylesConst.WS_BORDER;
 
-            top += 60;
+
+            top += 30;
+            NativeLabel lblUserFolder = new NativeLabel
+            {
+                Location = new Point(leftLeft, top),
+                Width = 100,
+                Height = 20,
+                Text = "Data-Folder:",
+                BackColor = this.BackColor
+            };
+
+            this._TxtUserDataFolder = new NativeTextBox
+            {
+                Location = new Point(rightLeft, top),
+                Width = 300,
+                Height = 20
+            };
+            this._TxtUserDataFolder.Style |= WindowStylesConst.WS_BORDER;
+
+            this._BnSelectUserDataFolder = new NativeButton
+            {
+                Location = new Point(rightLeft + 301, top),
+                Width = 25,
+                Height = 20,
+                Text = "…"
+            };
+            this._BnSelectUserDataFolder.Clicked += BnSelectUserDataFolder_Clicked;
+
+            top += 30;
+            NativeLabel lblBrowserExecutable = new NativeLabel
+            {
+                Location = new Point(leftLeft, top),
+                Width = 100,
+                Height = 20,
+                Text = "Browser-Folder:",
+                BackColor = this.BackColor
+            };
+
+            this._TxtBrowserExecutable = new NativeTextBox
+            {
+                Location = new Point(rightLeft, top),
+                Width = 300,
+                Height = 20
+            };
+            this._TxtBrowserExecutable.Style |= WindowStylesConst.WS_BORDER;
+
+            this._BnSelectBrowserExecutable = new NativeButton
+            {
+                Location = new Point(rightLeft + 301, top),
+                Width = 25,
+                Height = 20,
+                Text = "…"
+            };
+            this._BnSelectBrowserExecutable.Clicked += BnSelectBrowserExecutable_Clicked;
+
+            top += 30;
             this._ChkMonitoring =  new NativeCheckBox
             {
                 Location = new Point(leftLeft, top),
@@ -220,6 +283,12 @@ namespace WebAssemblyViewer
             this.Controls.Add(this._TxtTitle);
             this.Controls.Add(lblUrl);
             this.Controls.Add(this._TxtUrl);
+            this.Controls.Add(lblUserFolder);
+            this.Controls.Add(this._TxtUserDataFolder);
+            this.Controls.Add(this._BnSelectUserDataFolder);
+            this.Controls.Add(lblBrowserExecutable);
+            this.Controls.Add(this._TxtBrowserExecutable);
+            this.Controls.Add(this._BnSelectBrowserExecutable);
             this.Controls.Add(lblMonitoriingPath);
             this.Controls.Add(this._TxtMonitoringPath);
             this.Controls.Add(this._ChkContextMenu);
@@ -229,6 +298,26 @@ namespace WebAssemblyViewer
             this.Controls.Add(this._BnSelectMonitoringPath);
             this.Controls.Add(this._BnOk);
             this.Controls.Add(this._BnCancel);
+        }
+
+        private void BnSelectBrowserExecutable_Clicked(object sender, EventArgs e)
+        {
+            OpenFolderDialog ofd = new OpenFolderDialog();
+            ofd.Caption = "Select Browser-Executable-Folder Path";
+            if (ofd.Show(this))
+            {
+                this._TxtBrowserExecutable.Text = ofd.SelectedPath;
+            }
+        }
+
+        private void BnSelectUserDataFolder_Clicked(object sender, EventArgs e)
+        {
+            OpenFolderDialog ofd = new OpenFolderDialog();
+            ofd.Caption = "Select User-Data-Folder Path";
+            if (ofd.Show(this))
+            {
+                this._TxtUserDataFolder.Text = ofd.SelectedPath;
+            }
         }
 
         private void BnOk_Clicked(object sender, EventArgs e)

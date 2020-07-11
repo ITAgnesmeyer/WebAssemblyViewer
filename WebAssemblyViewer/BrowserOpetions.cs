@@ -8,9 +8,10 @@
         public bool StatusBar { get; set; }
         public string MonitoringPath { get; set; }
         public string Url { get; set; }
-
+        public string BrowserUserDataFolder{get;set;}
+        public string BrowserExecutableFolder { get; set; }
         public bool DevToolsEnable { get; set; }
         public bool ContextMenuEnable { get; set; }
-
+        
     }
 }
