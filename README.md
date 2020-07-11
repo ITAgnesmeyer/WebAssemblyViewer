@@ -19,6 +19,6 @@ The Application creates a config-File.
 ```
 ## Parameter
 1. /? => Help
-2. /f:<PATH-TO-ConfigFile> => Path to the Config-File
-3. /e => oopens the Config-Editor
+2. /f:PATH => Path to the Config-File
+3. /e => opens the Config-Editor
 
