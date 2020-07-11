@@ -4,13 +4,20 @@ The Application creates a config-File.
 
 ```xml
 <BrowserOpetions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Monitoring>true</Monitoring>
-  <MointoringUrl>http://my_app/</MointoringUrl>
+  <Monitoring>false</Monitoring>
+  <MointoringUrl>URL To MONITORING-Folder</MointoringUrl>
   <Title>My Application</Title>
   <StatusBar>true</StatusBar>
-  <MonitoringPath>c:\tmp\wwwroot</MonitoringPath>
-  <Url>http://my_app</Url>
+  <MonitoringPath></MonitoringPath>
+  <Url>https://www.itagnesmeyer.de</Url>
+  <BrowserUserDataFolder>Folder for User-Data WebView2</BrowserUserDataFolder>
+  <BrowserExecutableFolder>Path to WebView2-Edge executable</BrowserExecutableFolder>
   <DevToolsEnable>true</DevToolsEnable>
   <ContextMenuEnable>true</ContextMenuEnable>
 </BrowserOpetions>
 ```
+## Parameter
+1. /? => Help
+2. /f:<PATH-TO-ConfigFile> => Path to the Config-File
+3. /e => oopens the Config-Editor
+
