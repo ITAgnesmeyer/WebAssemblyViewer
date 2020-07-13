@@ -42,10 +42,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CoreWindowsWrapper, Version=1.0.4.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CoreWindowsWrapper.1.0.44\lib\net472\CoreWindowsWrapper.dll</HintPath>
+      <HintPath>..\packages\CoreWindowsWrapper.1.0.45\lib\net472\CoreWindowsWrapper.dll</HintPath>
     </Reference>
     <Reference Include="Diga.Core.Api.Win32, Version=1.0.19.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Diga.Core.Api.Win32.1.0.20\lib\net472\Diga.Core.Api.Win32.dll</HintPath>
+      <HintPath>..\packages\Diga.Core.Api.Win32.1.0.21\lib\net472\Diga.Core.Api.Win32.dll</HintPath>
     </Reference>
     <Reference Include="Diga.NativeControls.WebBrowser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Diga.NativeControls.WebBrowser.1.0.1\lib\net472\Diga.NativeControls.WebBrowser.dll</HintPath>

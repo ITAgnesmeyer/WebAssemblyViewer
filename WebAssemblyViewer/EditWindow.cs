@@ -276,9 +276,10 @@ namespace WebAssemblyViewer
             this._BnCancel.Clicked += BnCancel_Clicked;
             top += 80;
             this.Height = top;
-
-            this.Controls.Add(lblMonitoriingUrl);
-            this.Controls.Add(this._TxtMonitoriingUlr);
+            this.Controls.Add(this._BnOk);
+            this.Controls.Add(this._ChkContextMenu);
+            this.Controls.Add(this._ChkDevTools);
+            this.Controls.Add(this._ChkStatusBar);
             this.Controls.Add(lblTitle);
             this.Controls.Add(this._TxtTitle);
             this.Controls.Add(lblUrl);
@@ -289,14 +290,13 @@ namespace WebAssemblyViewer
             this.Controls.Add(lblBrowserExecutable);
             this.Controls.Add(this._TxtBrowserExecutable);
             this.Controls.Add(this._BnSelectBrowserExecutable);
+            this.Controls.Add(this._ChkMonitoring);
+            this.Controls.Add(lblMonitoriingUrl);
+            this.Controls.Add(this._TxtMonitoriingUlr);
             this.Controls.Add(lblMonitoriingPath);
             this.Controls.Add(this._TxtMonitoringPath);
-            this.Controls.Add(this._ChkContextMenu);
-            this.Controls.Add(this._ChkDevTools);
-            this.Controls.Add(this._ChkMonitoring);
-            this.Controls.Add(this._ChkStatusBar);
             this.Controls.Add(this._BnSelectMonitoringPath);
-            this.Controls.Add(this._BnOk);
+            
             this.Controls.Add(this._BnCancel);
         }
 
