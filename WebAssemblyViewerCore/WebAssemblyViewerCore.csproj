@@ -5,6 +5,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>WebAssemblyViewer</AssemblyName>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>App.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
