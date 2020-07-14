@@ -7,7 +7,7 @@ namespace WebAssemblyViewer
     class EditWindow : NativeWindow
     {
         private NativeCheckBox _ChkMonitoring;
-        private NativeTextBox _TxtMonitoriingUlr;
+        private NativeTextBox _TxtMonitoringUlr;
         private NativeTextBox _TxtUserDataFolder;
         private NativeButton _BnSelectUserDataFolder;
         private NativeTextBox _TxtBrowserExecutable;
@@ -33,7 +33,7 @@ namespace WebAssemblyViewer
         private void ViewToOptions()
         {
             this._Options.Monitoring = this._ChkMonitoring.Checked;
-            this._Options.MointoringUrl = this._TxtMonitoriingUlr.Text;
+            this._Options.MointoringUrl = this._TxtMonitoringUlr.Text;
             this._Options.MonitoringPath = this._TxtMonitoringPath.Text;
             this._Options.Title = this._TxtTitle.Text;
             this._Options.Url = this._TxtUrl.Text;
@@ -47,7 +47,7 @@ namespace WebAssemblyViewer
         private void OptionsToView()
         {
             this._ChkMonitoring.Checked = this._Options.Monitoring;
-            this._TxtMonitoriingUlr.Text = this._Options.MointoringUrl;
+            this._TxtMonitoringUlr.Text = this._Options.MointoringUrl;
             this._TxtMonitoringPath.Text = this._Options.MonitoringPath;
             this._TxtUserDataFolder.Text = this._Options.BrowserUserDataFolder;
             this._TxtBrowserExecutable.Text = this._Options.BrowserExecutableFolder;
@@ -217,13 +217,13 @@ namespace WebAssemblyViewer
                 BackColor= this.BackColor
 
             };
-            this._TxtMonitoriingUlr = new NativeTextBox
+            this._TxtMonitoringUlr = new NativeTextBox
             {
                 Location=new Point(rightLeft,top),
                 Width = 300,
                 Height = 20
             };
-            this._TxtMonitoriingUlr.Style |= WindowStylesConst.WS_BORDER;
+            this._TxtMonitoringUlr.Style |= WindowStylesConst.WS_BORDER;
 
             top += 30;
             
@@ -292,7 +292,7 @@ namespace WebAssemblyViewer
             this.Controls.Add(this._BnSelectBrowserExecutable);
             this.Controls.Add(this._ChkMonitoring);
             this.Controls.Add(lblMonitoriingUrl);
-            this.Controls.Add(this._TxtMonitoriingUlr);
+            this.Controls.Add(this._TxtMonitoringUlr);
             this.Controls.Add(lblMonitoriingPath);
             this.Controls.Add(this._TxtMonitoringPath);
             this.Controls.Add(this._BnSelectMonitoringPath);
