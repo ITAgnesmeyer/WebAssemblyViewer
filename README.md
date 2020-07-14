@@ -57,7 +57,8 @@ In this example the configuration-file "c:\tmp\myConfig.cfg" will be shown in th
 ```
 WebAssemblyViewer.exe /e /f:c:\tmp\myConfig.cfg
 ```
-
+---
+##### 2020 Dipl.-Ing.(FH) Guido Agnesmeyer
 
 
 
