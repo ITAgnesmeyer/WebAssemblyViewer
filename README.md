@@ -13,6 +13,8 @@ The tool has call parameters that allow you to set a path to a configuration fil
 The configuration file is an XML file in which you can set various parameters.
 If you then edit and save the parameters, you can call the tool with the switch "/e". Then you will see an editing window where you can easily edit the parameters.
 
+![Configuration-Editor](https://github.com/ITAgnesmeyer/WebAssemblyViewer/blob/master/images/ConfigEditor.PNG)
+
 ## Ship Edge with the Tool
 You can also ship the Edge browser right away. There is a "BrowserExecutableFolder" entry in the configuration file. Here you can simply leave the path to your Edge installation. In this case, the Edge browser will start in this directory. This can become important if you don't have the ability to install the Edge browser on the target system. You can also specify where the browser should store the profile data "BrowserUserDataFolder". If you don't have anything here, the profile data will be stored in the directory of the application. Which, of course, is not possible with an installation.
 
