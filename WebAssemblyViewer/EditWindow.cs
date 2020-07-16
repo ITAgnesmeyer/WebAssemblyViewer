@@ -25,7 +25,7 @@ namespace WebAssemblyViewer
 
         public bool Result { get; private set; }
 
-        public EditWindow(BrowserOpetions options) : base()
+        public EditWindow(BrowserOpetions options) 
         {
             this._Options = options;
         }
@@ -66,8 +66,9 @@ namespace WebAssemblyViewer
         protected override void InitControls()
         {
             this.Text = "Configuration Editor";
-            this.Width = 500;
+            this.Width = 480;
             this.Height = 430;
+            this.IconFile = "App.ico";
             this.StartUpPosition = WindowsStartupPosition.CenterScreen;
 
             int top = 10;
@@ -247,17 +248,17 @@ namespace WebAssemblyViewer
             top += 30;
             this._BnOk = new NativeButton
             {
-                Width = 100,
-                Height = 30,
-                Location = new Point(500 - 30 - 100, top),
+                Width = 80,
+                Height = 25,
+                Location = new Point(this.Width - 33 - 81, top),
                 Text = "&Ok"
             };
             this._BnOk.Clicked += BnOk_Clicked;
             this._BnCancel = new NativeButton
             {
-                Width = 100,
-                Height = 30,
-                Location = new Point(this._BnOk.Left - 10 - 100, top),
+                Width = 80,
+                Height = 25,
+                Location = new Point(this._BnOk.Left - 10 - 80, top),
                 Text = "&Cancel"
             };
             this._BnCancel.Clicked += BnCancel_Clicked;
