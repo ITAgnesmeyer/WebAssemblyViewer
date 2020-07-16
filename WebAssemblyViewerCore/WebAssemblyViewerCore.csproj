@@ -22,6 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\WebAssemblyViewer\asset\Question.bmp" Link="asset\Question.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="App.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -32,6 +35,10 @@
     <PackageReference Include="Diga.NativeControls.WebBrowser" Version="1.0.1" />
     <PackageReference Include="Diga.WebView2.Wrapper" Version="2.0.4" />
     <PackageReference Include="EasyXMLSerializer" Version="1.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="asset\" />
   </ItemGroup>
 
 </Project>

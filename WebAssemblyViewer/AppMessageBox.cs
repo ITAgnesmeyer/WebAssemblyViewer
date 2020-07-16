@@ -11,7 +11,7 @@ namespace WebAssemblyViewer
         private NativeLabel _LblMessage;
         private NativeButton _BnOk;
         private NativeButton _BnCancel;
-        private NativeLabel _LblIcon;
+        private NativeBitmap _LblIcon;
         public MessageBoxResult Result{get;private set;}
         protected override void OnBeforeCreate(BeforeWindowCreateEventArgs e)
         {
@@ -42,14 +42,13 @@ namespace WebAssemblyViewer
                 //BackColor = ColorTool.Gray,
                 //ForeColor = ColorTool.White,
             };
-            this._LblIcon = new NativeLabel
+            this._LblIcon = new NativeBitmap
             {
+                BitMap = "asset\\Question.bmp",
                 Location = new Point(10,this._LblMessage.Height / 2 - 25),
                 Width = 50,
                 Height = 50,
-                Text = "",
-                Font =new Font{Name="Material Icons",Size = 40},
-                ForeColor = ColorTool.Rgb(24, 52, 75)
+                
             };
             this._BnOk = new NativeButton
             {
@@ -74,7 +73,11 @@ namespace WebAssemblyViewer
             this.Controls.Add(this._BnOk);
             this.Controls.Add(this._BnCancel);
         }
-
+        protected override void OnCreate(CreateEventArgs e)
+        {
+            base.OnCreate(e);
+            this._LblIcon.Refresh();
+        }
         private void Cancel_Clicked(object sender, EventArgs e)
         {
             this.Result = MessageBoxResult.Cancel;
