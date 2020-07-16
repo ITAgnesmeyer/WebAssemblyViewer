@@ -152,16 +152,6 @@ namespace WebAssemblyViewer
             if (url.StartsWith("file://")) return true;
             return false;
         }
-        //protected override void OnSize(SizeEventArgs e)
-        //{
-
-        //    base.OnSize(e);
-        //    if (this.Width == 0) return;
-        //    this._Browser.Left = e.X;
-        //    this._Browser.Top = e.Y;
-        //    this._Browser.Width = e.Width;
-        //    this._Browser.Height = e.Height;
-        //    this._Browser.DoDock();
-        //}
+       
     }
 }

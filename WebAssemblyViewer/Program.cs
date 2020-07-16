@@ -3,31 +3,27 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace WebAssemblyViewer
 {
     static class Program
     {
-
-
-
-
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
         /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
-
             string configFile = "WebAssemblyViewer.cfg";
 
-       
+
             ArgOptions argOptions = GetOptions(args);
 
             if (argOptions.ContainsHelp)
             {
-                MessageBox.Show(IntPtr.Zero,"Parameter:\n\n/f:<Path>\tset the path to config-file\n/e \t\topens the Config Editor!\n/?\t\tHelp\n\nExample:\n\nWebAssemblyViewer.exe /f:c:\\tmp\\config.cfg\n\n","Parameters",MessageBoxOptions.OkOnly | MessageBoxOptions.IconInformation);
+                MessageBox.Show(IntPtr.Zero,
+                    "Parameter:\n\n/f:<Path>\tset the path to config-file\n/e \t\topens the Config Editor!\n/?\t\tHelp\n\nExample:\n\nWebAssemblyViewer.exe /f:c:\\tmp\\config.cfg\n\n",
+                    "Parameters", MessageBoxOptions.OkOnly | MessageBoxOptions.IconInformation);
                 return;
             }
 
@@ -40,19 +36,20 @@ namespace WebAssemblyViewer
                     MessageBox.Show("The directory of config-File cannot be found!");
                     return;
                 }
-
             }
-
-
+            
             BrowserOpetions opetions;
-            if(!LoadOptions(configFile,out opetions))
+            if (!LoadOptions(configFile, out opetions))
             {
                 opetions = GetDefaultOptions();
-                if(WriteOptions(configFile, opetions))
+                if (WriteOptions(configFile, opetions))
                 {
                     if (!argOptions.ContainsEdit)
                     {
-                        MessageBoxResult result = MessageBox.Show(IntPtr.Zero, "The Application created a configuration - file = (WebAssemblyViewer.cfg)\nDo you want to continue with emtyp configuration file?", "Config file created!", MessageBoxOptions.YesNo | MessageBoxOptions.IconQuestion | MessageBoxOptions.DefButton2);
+                        MessageBoxResult result = MessageBox.Show(IntPtr.Zero,
+                            "The Application created a configuration - file = (WebAssemblyViewer.cfg)\nDo you want to continue with emtyp configuration file?",
+                            "Config file created!",
+                            MessageBoxOptions.YesNo | MessageBoxOptions.IconQuestion | MessageBoxOptions.DefButton2);
                         if (result == MessageBoxResult.No)
                         {
                             result = MessageBox.Show(IntPtr.Zero, "Do you want to Edit the Cofig-File?",
@@ -66,23 +63,20 @@ namespace WebAssemblyViewer
                                 return;
                             }
                         }
-                           
                     }
                 }
             }
 
             if (argOptions.ContainsEdit)
             {
-                
                 EditWindow ew = new EditWindow(opetions);
                 NativeApp.Run(ew);
-               
-                
+
+
                 if (ew.Result)
                 {
                     if (WriteOptions(configFile, opetions))
                     {
-
                         AppMessageBox mg = new AppMessageBox();
                         mg.Caption = "Continue?";
                         mg.Message =
@@ -93,16 +87,14 @@ namespace WebAssemblyViewer
                         {
                             return;
                         }
-
                     }
                 }
-                
             }
 
             BrowserWindow bw = new BrowserWindow(opetions);
             NativeApp.Run(bw);
         }
-
+        
         public static BrowserOpetions GetDefaultOptions()
         {
             return new BrowserOpetions
@@ -116,51 +108,52 @@ namespace WebAssemblyViewer
                 DevToolsEnable = true,
                 ContextMenuEnable = true,
                 BrowserUserDataFolder = "",
-                BrowserExecutableFolder=""
+                BrowserExecutableFolder = ""
             };
-    }
+        }
 
         private static bool LoadOptions(string fileName, out BrowserOpetions options)
         {
             EasyXMLSerializer.SerializeTool ser = new EasyXMLSerializer.SerializeTool(fileName);
             options = ser.ReadXmlFile<BrowserOpetions>(fileName);
-            if(options == null)
+            if (options == null)
             {
-                if(!string.IsNullOrEmpty(ser.LastError))
+                if (!string.IsNullOrEmpty(ser.LastError))
                 {
-                    MessageBox.Show(IntPtr.Zero, "Cannot load Config File " + fileName + "\n" + ser.LastError,"Error Loading Config!", MessageBoxOptions.OkOnly | MessageBoxOptions.IconExclamation);
-
+                    MessageBox.Show(IntPtr.Zero, "Cannot load Config File " + fileName + "\n" + ser.LastError,
+                        "Error Loading Config!", MessageBoxOptions.OkOnly | MessageBoxOptions.IconExclamation);
                 }
+
                 return false;
             }
-            return true;
 
+            return true;
         }
-        private static bool WriteOptions(string fileName , BrowserOpetions opetions)
+
+        private static bool WriteOptions(string fileName, BrowserOpetions opetions)
         {
             bool retVal = true;
             EasyXMLSerializer.SerializeTool ser = new EasyXMLSerializer.SerializeTool(fileName);
             if (!ser.WriteXmlFile(opetions))
             {
-                MessageBox.Show(IntPtr.Zero, "Cannot write Options to File:" + fileName + "\n" + ser.LastError, "Options - Error!", MessageBoxOptions.OkOnly | MessageBoxOptions.IconExclamation);
+                MessageBox.Show(IntPtr.Zero, "Cannot write Options to File:" + fileName + "\n" + ser.LastError,
+                    "Options - Error!", MessageBoxOptions.OkOnly | MessageBoxOptions.IconExclamation);
                 retVal = false;
             }
+
             return retVal;
         }
-
-
+        
         static ArgOptions GetOptions(string[] args)
         {
             Dictionary<string, string> retval = args.ToDictionary(
-                k => k.Split(new[] { ':' }, 2)[0].ToLower(),
-                v => v.Split(new[] { ':' }, 2).Count() > 1 
-                    ? v.Split(new[] { ':' }, 2)[1] 
+                k => k.Split(new[] {':'}, 2)[0].ToLower(),
+                v => v.Split(new[] {':'}, 2).Count() > 1
+                    ? v.Split(new[] {':'}, 2)[1]
                     : null);
 
             ArgOptions ops = new ArgOptions(retval);
             return ops;
         }
     }
-
-
 }

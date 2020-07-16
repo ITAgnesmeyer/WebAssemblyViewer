@@ -23,11 +23,11 @@ namespace WebAssemblyViewer
         private NativeButton _BnOk;
         private NativeButton _BnCancel;
 
-        public bool Result{get;private set;}
+        public bool Result { get; private set; }
+
         public EditWindow(BrowserOpetions options) : base()
         {
             this._Options = options;
-
         }
 
         private void ViewToOptions()
@@ -42,8 +42,8 @@ namespace WebAssemblyViewer
             this._Options.StatusBar = this._ChkStatusBar.Checked;
             this._Options.BrowserUserDataFolder = this._TxtUserDataFolder.Text;
             this._Options.BrowserExecutableFolder = this._TxtBrowserExecutable.Text;
-
         }
+
         private void OptionsToView()
         {
             this._ChkMonitoring.Checked = this._Options.Monitoring;
@@ -56,12 +56,13 @@ namespace WebAssemblyViewer
             this._ChkDevTools.Checked = this._Options.DevToolsEnable;
             this._ChkContextMenu.Checked = this._Options.ContextMenuEnable;
             this._ChkStatusBar.Checked = this._Options.StatusBar;
-
         }
+
         protected override void OnBeforeCreate(BeforeWindowCreateEventArgs e)
         {
             e.Styles.Style = WindowStylesConst.WS_DLGFRAME | WindowStylesConst.WS_SYSMENU;
         }
+
         protected override void InitControls()
         {
             this.Text = "Configuration Editor";
@@ -80,8 +81,6 @@ namespace WebAssemblyViewer
                 Width = 100,
                 Height = 20,
                 Text = "Context-Menu",
-                
-                
             };
             this._ChkContextMenu.Style |= WindowStylesConst.WS_TABSTOP;
             this._ChkDevTools = new NativeCheckBox
@@ -90,7 +89,6 @@ namespace WebAssemblyViewer
                 Width = 100,
                 Height = 20,
                 Text = "Dev-Tools"
-                
             };
 
             this._ChkStatusBar = new NativeCheckBox
@@ -99,17 +97,15 @@ namespace WebAssemblyViewer
                 Width = 100,
                 Height = 20,
                 Text = "Statusbar"
-                
             };
 
             top += 30;
-            
             NativeLabel lblTitle = new NativeLabel
             {
-                Location = new Point(leftLeft, top), 
-                Width = 100, 
-                Height = 20, 
-                Text ="Title:", 
+                Location = new Point(leftLeft, top),
+                Width = 100,
+                Height = 20,
+                Text = "Title:",
                 BackColor = this.BackColor
             };
 
@@ -123,8 +119,6 @@ namespace WebAssemblyViewer
 
 
             top += 30;
-            
-            
             NativeLabel lblUrl = new NativeLabel
             {
                 Location = new Point(leftLeft, top),
@@ -139,7 +133,6 @@ namespace WebAssemblyViewer
                 Location = new Point(rightLeft, top),
                 Width = 300,
                 Height = 20
-
             };
             this._TxtUrl.Style |= WindowStylesConst.WS_BORDER;
 
@@ -199,7 +192,7 @@ namespace WebAssemblyViewer
             this._BnSelectBrowserExecutable.Clicked += BnSelectBrowserExecutable_Clicked;
 
             top += 30;
-            this._ChkMonitoring =  new NativeCheckBox
+            this._ChkMonitoring = new NativeCheckBox
             {
                 Location = new Point(leftLeft, top),
                 Width = 100,
@@ -210,24 +203,21 @@ namespace WebAssemblyViewer
             top += 30;
             NativeLabel lblMonitoriingUrl = new NativeLabel
             {
-                Location = new Point(leftLeft, top), 
-                Width = 100, 
-                Height = 20, 
-                Text = "Monitoring-Url:", 
-                BackColor= this.BackColor
-
+                Location = new Point(leftLeft, top),
+                Width = 100,
+                Height = 20,
+                Text = "Monitoring-Url:",
+                BackColor = this.BackColor
             };
             this._TxtMonitoringUlr = new NativeTextBox
             {
-                Location=new Point(rightLeft,top),
+                Location = new Point(rightLeft, top),
                 Width = 300,
                 Height = 20
             };
             this._TxtMonitoringUlr.Style |= WindowStylesConst.WS_BORDER;
 
             top += 30;
-            
-            
             NativeLabel lblMonitoriingPath = new NativeLabel
             {
                 Location = new Point(leftLeft, top),
@@ -242,7 +232,6 @@ namespace WebAssemblyViewer
                 Location = new Point(rightLeft, top),
                 Width = 300,
                 Height = 20
-                
             };
             this._TxtMonitoringPath.Style |= WindowStylesConst.WS_BORDER;
 
@@ -253,17 +242,15 @@ namespace WebAssemblyViewer
                 Height = 20,
                 Text = "…"
             };
-            this._BnSelectMonitoringPath.Clicked+= BnSelectMonitoringPath_Click;
+            this._BnSelectMonitoringPath.Clicked += BnSelectMonitoringPath_Click;
 
             top += 30;
             this._BnOk = new NativeButton
             {
                 Width = 100,
                 Height = 30,
-                Location = new Point(500 - 30 - 100,top ),
+                Location = new Point(500 - 30 - 100, top),
                 Text = "&Ok"
-                
-
             };
             this._BnOk.Clicked += BnOk_Clicked;
             this._BnCancel = new NativeButton
@@ -296,7 +283,7 @@ namespace WebAssemblyViewer
             this.Controls.Add(lblMonitoriingPath);
             this.Controls.Add(this._TxtMonitoringPath);
             this.Controls.Add(this._BnSelectMonitoringPath);
-            
+
             this.Controls.Add(this._BnCancel);
         }
 
@@ -331,7 +318,6 @@ namespace WebAssemblyViewer
         {
             this.Result = false;
             this.Close();
-
         }
 
         protected override void OnCreate(CreateEventArgs e)
@@ -339,9 +325,8 @@ namespace WebAssemblyViewer
             base.OnCreate(e);
             OptionsToView();
             this.Result = false;
-
-
         }
+
         private void BnSelectMonitoringPath_Click(object sender, EventArgs e)
         {
             OpenFolderDialog ofd = new OpenFolderDialog();
