@@ -3,7 +3,7 @@
     public class BrowserOptions
     {
         public bool Monitoring { get; set; }
-        public string MointoringUrl { get; set; }
+        public string MonitoringUrl { get; set; }
         public string Title { get; set; }
         public bool StatusBar { get; set; }
         public bool AppStatusBar{get;set;}

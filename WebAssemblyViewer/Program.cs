@@ -102,7 +102,7 @@ namespace WebAssemblyViewer
                 Title = "My Application",
                 Monitoring = false,
                 MonitoringPath = "",
-                MointoringUrl = "",
+                MonitoringUrl = "",
                 Url = "https://www.itagnesmeyer.de",
                 StatusBar = true,
                 DevToolsEnable = true,

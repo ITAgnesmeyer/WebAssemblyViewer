@@ -110,7 +110,7 @@ namespace WebAssemblyViewer
 
             if(this._Options.Monitoring)
             {
-                if(!TestUrl(this._Options.MointoringUrl))
+                if(!TestUrl(this._Options.MonitoringUrl))
                 {
                     string message = ParamErrorHead + ParamErrorMonitoringUrl + ParamTable; 
                     this._Browser.NavigateToString(message);
@@ -128,7 +128,7 @@ namespace WebAssemblyViewer
             //this._Browser.Navigate(this._Options.Url);
             this._Browser.IsStatusBarEnabled = this._Options.StatusBar;
             this._Browser.MonitoringFolder = this._Options.MonitoringPath;
-            this._Browser.MonitoringUrl = this._Options.MointoringUrl;
+            this._Browser.MonitoringUrl = this._Options.MonitoringUrl;
             
 
             this._Browser.EnableMonitoring = this._Options.Monitoring;

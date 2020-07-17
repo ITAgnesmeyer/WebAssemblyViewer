@@ -34,7 +34,7 @@ namespace WebAssemblyViewer
         private void ViewToOptions()
         {
             this._Options.Monitoring = this._ChkMonitoring.Checked;
-            this._Options.MointoringUrl = this._TxtMonitoringUlr.Text;
+            this._Options.MonitoringUrl = this._TxtMonitoringUlr.Text;
             this._Options.MonitoringPath = this._TxtMonitoringPath.Text;
             this._Options.Title = this._TxtTitle.Text;
             this._Options.Url = this._TxtUrl.Text;
@@ -49,7 +49,7 @@ namespace WebAssemblyViewer
         private void OptionsToView()
         {
             this._ChkMonitoring.Checked = this._Options.Monitoring;
-            this._TxtMonitoringUlr.Text = this._Options.MointoringUrl;
+            this._TxtMonitoringUlr.Text = this._Options.MonitoringUrl;
             this._TxtMonitoringPath.Text = this._Options.MonitoringPath;
             this._TxtUserDataFolder.Text = this._Options.BrowserUserDataFolder;
             this._TxtBrowserExecutable.Text = this._Options.BrowserExecutableFolder;
