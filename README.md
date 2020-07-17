@@ -30,11 +30,12 @@ The icon of the application is loaded from the directory of the application. The
 ## The Application creates a config-File.
 
 ```xml
-<BrowserOpetions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<BrowserOptions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Monitoring>false</Monitoring>
-  <MointoringUrl>URL To MONITORING-Folder</MointoringUrl>
+  <MonitoringUrl>URL To MONITORING-Folder</MointoringUrl>
   <Title>My Application</Title>
   <StatusBar>true</StatusBar>
+  <AppStatusBar>false</AppStatusBar>
   <MonitoringPath></MonitoringPath>
   <Url>https://www.itagnesmeyer.de</Url>
   <BrowserUserDataFolder>Folder for User-Data WebView2</BrowserUserDataFolder>
