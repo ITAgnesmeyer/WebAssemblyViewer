@@ -1,11 +1,12 @@
 ﻿namespace WebAssemblyViewer
 {
-    public class BrowserOpetions
+    public class BrowserOptions
     {
         public bool Monitoring { get; set; }
         public string MointoringUrl { get; set; }
         public string Title { get; set; }
         public bool StatusBar { get; set; }
+        public bool AppStatusBar{get;set;}
         public string MonitoringPath { get; set; }
         public string Url { get; set; }
         public string BrowserUserDataFolder{get;set;}

@@ -15,7 +15,7 @@
   <ItemGroup>
     <Compile Include="..\WebAssemblyViewer\AppMessageBox.cs" Link="AppMessageBox.cs" />
     <Compile Include="..\WebAssemblyViewer\ArgOptions.cs" Link="ArgOptions.cs" />
-    <Compile Include="..\WebAssemblyViewer\BrowserOpetions.cs" Link="BrowserOpetions.cs" />
+    <Compile Include="..\WebAssemblyViewer\BrowserOptions.cs" Link="BrowserOptions.cs" />
     <Compile Include="..\WebAssemblyViewer\BrowserWindow.cs" Link="BrowserWindow.cs" />
     <Compile Include="..\WebAssemblyViewer\EditWindow.cs" Link="EditWindow.cs" />
     <Compile Include="..\WebAssemblyViewer\Program.cs" Link="Program.cs" />
@@ -32,8 +32,8 @@
 
   <ItemGroup>
     <PackageReference Include="CoreWindowsWrapper" Version="1.0.45" />
-    <PackageReference Include="Diga.NativeControls.WebBrowser" Version="1.0.1" />
-    <PackageReference Include="Diga.WebView2.Wrapper" Version="2.0.4" />
+    <PackageReference Include="Diga.NativeControls.WebBrowser" Version="1.0.2" />
+    <PackageReference Include="Diga.WebView2.Wrapper" Version="3.0.1" />
     <PackageReference Include="EasyXMLSerializer" Version="1.0.9" />
   </ItemGroup>
 

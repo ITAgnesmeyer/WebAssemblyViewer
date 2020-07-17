@@ -14,18 +14,19 @@ namespace WebAssemblyViewer
         private NativeButton _BnSelectBrowserExecutable;
         private NativeTextBox _TxtTitle;
         private NativeCheckBox _ChkStatusBar;
+        private NativeCheckBox _ChkAppStatusBar;
         private NativeTextBox _TxtMonitoringPath;
         private NativeTextBox _TxtUrl;
         private NativeCheckBox _ChkDevTools;
         private NativeCheckBox _ChkContextMenu;
         private NativeButton _BnSelectMonitoringPath;
-        private BrowserOpetions _Options;
+        private BrowserOptions _Options;
         private NativeButton _BnOk;
         private NativeButton _BnCancel;
 
         public bool Result { get; private set; }
 
-        public EditWindow(BrowserOpetions options) 
+        public EditWindow(BrowserOptions options) 
         {
             this._Options = options;
         }
@@ -40,6 +41,7 @@ namespace WebAssemblyViewer
             this._Options.DevToolsEnable = this._ChkDevTools.Checked;
             this._Options.ContextMenuEnable = this._ChkContextMenu.Checked;
             this._Options.StatusBar = this._ChkStatusBar.Checked;
+            this._Options.AppStatusBar = this._ChkAppStatusBar.Checked;
             this._Options.BrowserUserDataFolder = this._TxtUserDataFolder.Text;
             this._Options.BrowserExecutableFolder = this._TxtBrowserExecutable.Text;
         }
@@ -56,6 +58,7 @@ namespace WebAssemblyViewer
             this._ChkDevTools.Checked = this._Options.DevToolsEnable;
             this._ChkContextMenu.Checked = this._Options.ContextMenuEnable;
             this._ChkStatusBar.Checked = this._Options.StatusBar;
+            this._ChkAppStatusBar.Checked = this._Options.AppStatusBar;
         }
 
         protected override void OnBeforeCreate(BeforeWindowCreateEventArgs e)
@@ -98,6 +101,15 @@ namespace WebAssemblyViewer
                 Width = 100,
                 Height = 20,
                 Text = "Statusbar"
+            };
+
+
+            this._ChkAppStatusBar = new NativeCheckBox
+            {
+                Location = new Point(this._ChkStatusBar.Left + this._ChkStatusBar.Width + 10, top),
+                Width = 100,
+                Height = 20,
+                Text = "App-Statusbar"
             };
 
             top += 30;
@@ -268,6 +280,7 @@ namespace WebAssemblyViewer
             this.Controls.Add(this._ChkContextMenu);
             this.Controls.Add(this._ChkDevTools);
             this.Controls.Add(this._ChkStatusBar);
+            this.Controls.Add(this._ChkAppStatusBar);
             this.Controls.Add(lblTitle);
             this.Controls.Add(this._TxtTitle);
             this.Controls.Add(lblUrl);

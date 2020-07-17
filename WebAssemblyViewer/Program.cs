@@ -38,7 +38,7 @@ namespace WebAssemblyViewer
                 }
             }
             
-            BrowserOpetions opetions;
+            BrowserOptions opetions;
             if (!LoadOptions(configFile, out opetions))
             {
                 opetions = GetDefaultOptions();
@@ -95,9 +95,9 @@ namespace WebAssemblyViewer
             NativeApp.Run(bw);
         }
         
-        public static BrowserOpetions GetDefaultOptions()
+        public static BrowserOptions GetDefaultOptions()
         {
-            return new BrowserOpetions
+            return new BrowserOptions
             {
                 Title = "My Application",
                 Monitoring = false,
@@ -108,14 +108,15 @@ namespace WebAssemblyViewer
                 DevToolsEnable = true,
                 ContextMenuEnable = true,
                 BrowserUserDataFolder = "",
-                BrowserExecutableFolder = ""
+                BrowserExecutableFolder = "",
+                AppStatusBar=false
             };
         }
 
-        private static bool LoadOptions(string fileName, out BrowserOpetions options)
+        private static bool LoadOptions(string fileName, out BrowserOptions options)
         {
             EasyXMLSerializer.SerializeTool ser = new EasyXMLSerializer.SerializeTool(fileName);
-            options = ser.ReadXmlFile<BrowserOpetions>(fileName);
+            options = ser.ReadXmlFile<BrowserOptions>(fileName);
             if (options == null)
             {
                 if (!string.IsNullOrEmpty(ser.LastError))
@@ -130,7 +131,7 @@ namespace WebAssemblyViewer
             return true;
         }
 
-        private static bool WriteOptions(string fileName, BrowserOpetions opetions)
+        private static bool WriteOptions(string fileName, BrowserOptions opetions)
         {
             bool retVal = true;
             EasyXMLSerializer.SerializeTool ser = new EasyXMLSerializer.SerializeTool(fileName);
