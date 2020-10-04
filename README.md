@@ -1,6 +1,8 @@
 # WebAssemblyViewer
 Application to Show WebAssembly-Sites without a Web-Server.
 
+[Watch - WebAssemblyViewer](https://youtu.be/r2iNDIE9T6Q)
+
 ## Why was this project created?
 Microsoft provides an extremely cool and powerful developr platform with [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor "Blazor").
 This platform is based on [WebAssembies](https://webassembly.org/ "WebAssembly"). However, WebAssemblies can only be operated in conjunction with a Web server. This is actually a pity, as unimagined design possibilities are opening up with this technology based on WebAsseblies. Each application would have to start its own Web server. This leads to various problems. Apart from the eligibility questions, this can cause major problems. 
