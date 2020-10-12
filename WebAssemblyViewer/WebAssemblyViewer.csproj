@@ -50,14 +50,14 @@
       <HintPath>..\packages\Diga.Core.Api.Win32.1.0.23\lib\net472\Diga.Core.Api.Win32.dll</HintPath>
     </Reference>
     <Reference Include="Diga.NativeControls.WebBrowser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Diga.NativeControls.WebBrowser.1.0.5\lib\net472\Diga.NativeControls.WebBrowser.dll</HintPath>
+      <HintPath>..\packages\Diga.NativeControls.WebBrowser.1.0.6\lib\net472\Diga.NativeControls.WebBrowser.dll</HintPath>
     </Reference>
-    <Reference Include="Diga.WebView2.Interop.V9538, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Diga.WebView2.Interop.5.0.1\lib\net472\Diga.WebView2.Interop.V9538.dll</HintPath>
+    <Reference Include="Diga.WebView2.Interop.V9622, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Diga.WebView2.Interop.6.0.1\lib\net472\Diga.WebView2.Interop.V9622.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Diga.WebView2.Wrapper.V9538, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Diga.WebView2.Wrapper.5.0.2\lib\net472\Diga.WebView2.Wrapper.V9538.dll</HintPath>
+    <Reference Include="Diga.WebView2.Wrapper.V9622, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Diga.WebView2.Wrapper.6.0.1\lib\net472\Diga.WebView2.Wrapper.V9622.dll</HintPath>
     </Reference>
     <Reference Include="EasyXMLSerializer, Version=1.0.9.0, Culture=neutral, PublicKeyToken=2deb65490f96ad55, processorArchitecture=MSIL">
       <HintPath>..\packages\EasyXMLSerializer.1.0.9\lib\net472\EasyXMLSerializer.dll</HintPath>
@@ -115,11 +115,11 @@
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Diga.WebView2.Wrapper.5.0.2\build\Diga.WebView2.Wrapper.targets" Condition="Exists('..\packages\Diga.WebView2.Wrapper.5.0.2\build\Diga.WebView2.Wrapper.targets')" />
+  <Import Project="..\packages\Diga.WebView2.Wrapper.6.0.1\build\Diga.WebView2.Wrapper.targets" Condition="Exists('..\packages\Diga.WebView2.Wrapper.6.0.1\build\Diga.WebView2.Wrapper.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Dieses Projekt verweist auf mindestens ein NuGet-Paket, das auf diesem Computer fehlt. Verwenden Sie die Wiederherstellung von NuGet-Paketen, um die fehlenden Dateien herunterzuladen. Weitere Informationen finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=322105". Die fehlende Datei ist "{0}".</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Diga.WebView2.Wrapper.5.0.2\build\Diga.WebView2.Wrapper.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Diga.WebView2.Wrapper.5.0.2\build\Diga.WebView2.Wrapper.targets'))" />
+    <Error Condition="!Exists('..\packages\Diga.WebView2.Wrapper.6.0.1\build\Diga.WebView2.Wrapper.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Diga.WebView2.Wrapper.6.0.1\build\Diga.WebView2.Wrapper.targets'))" />
   </Target>
 </Project>
