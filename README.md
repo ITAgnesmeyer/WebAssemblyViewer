@@ -20,6 +20,8 @@ If you then edit and save the parameters, you can call the tool with the switch 
 ## Ship Edge with the Tool
 You can also ship the Edge browser right away. There is a "BrowserExecutableFolder" entry in the configuration file. Here you can simply leave the path to your Edge installation. In this case, the Edge browser will start in this directory. This can become important if you don't have the ability to install the Edge browser on the target system. You can also specify where the browser should store the profile data "BrowserUserDataFolder". If you don't have anything here, the profile data will be stored in the directory of the application. Which, of course, is not possible with an installation.
 
+You can download the [WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)
+
 ## Start Blazor-Pages from a directory
 If you want to start a web page from a directory, 3 parameters are responsible for this.
 You need to turn this on first. To do this, set the "Monitoring" switch to true. Then you give the "Url" to which you want to intercept "MointoringUrl". And then you enter the directory where your Blazor page is located "MonitoringPath".
