@@ -27,6 +27,42 @@ If you want to start a web page from a directory, 3 parameters are responsible f
 You need to turn this on first. To do this, set the "Monitoring" switch to true. Then you give the "Url" to which you want to intercept "MointoringUrl". And then you enter the directory where your Blazor page is located "MonitoringPath".
 Attention the url must end with a "/" at the "MonitoringUrl" switch. E.g. "https://localhost:1/". It is important that only entries with "http://", "https://" or "file://" can be found there. In my tests I did not manage to deposit other values there. Not all possible combinations are possible either. The entries must follow the rules of URL's. WebAssenbly - Pages do not work for entries with "file://". This is because the Java scripts do not allow this. The tool generates response headers that allow crossloading.
 
+### Microsoft 
+Microsoft reacted and extended the interface ICoreWebView2_3 by the function SetVirtualHostNameToFolderMapping. A URL can be linked to a directory here. 
+
+### Example:
+In this example the URL http://local.diga-net.com is linked to the directory "C:\tmp\wwwroot". Please note that the third parameter CoreWebView2HostResourceAccessKind is set to Allow.
+
+```c#
+private void webView21_CoreWebView2InitializationCompleted(object sender, 
+   Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs e)
+{
+   var obj = this.webView21.CoreWebView2;
+   obj.SetVirtualHostNameToFolderMapping("local.diga-net.com", "C:\\tmp\\wwwroot",
+   Microsoft.Web.WebView2.Core.CoreWebView2HostResourceAccessKind.Allow);
+}
+
+```
+Still, there are a few problems here. 
+If you set the directory of a WebAssembly application and only call the directory http://local.diga-net.com, this does not work. An existing file must always be specified. e.g. http://local.diga-net.com/index.html. If the application is then loaded, not all of the content is loaded, because WebAssemlies builds on the fact that index.html default.html etc. is automatically searched for. 
+
+You could try the following:
+```c#
+private void webView21_NavigationStarting(object sender, 
+   Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs e)
+{
+   if (e.Uri == "http://local.diga-net.com" || e.Uri == "https://local.diga-net.com" ||
+   e.Uri == "http://local.diga-net.com/" || e.Uri == "https://local.diga-net.com/")
+   {
+      this.webView21.Source = new Uri("https://local.diga-net.com/index.html");
+   }
+}
+```
+But that doesn't help in all cases.
+
+
+Nevertheless, it is a big step forward.
+
 ## Application Icon.
 The icon of the application is loaded from the directory of the application. There is a file "App.ico" here you can deposit your own icon if you want.
 
@@ -63,7 +99,7 @@ In this example the configuration-file "c:\tmp\myConfig.cfg" will be shown in th
 WebAssemblyViewer.exe /e /f:c:\tmp\myConfig.cfg
 ```
 ---
-##### 2020 Dipl.-Ing.(FH) Guido Agnesmeyer
+##### 2021 Dipl.-Ing.(FH) Guido Agnesmeyer
 
 
 
