@@ -32,10 +32,11 @@
 
   <ItemGroup>
     <PackageReference Include="CoreWindowsWrapper" Version="1.0.47" />
-    <PackageReference Include="Diga.NativeControls.WebBrowser" Version="1.0.8" />
-    <PackageReference Include="Diga.WebView2.Wrapper" Version="8.0.3" />
+    <PackageReference Include="Diga.Core.Api.Win32.Core" Version="1.0.26" />
+    <PackageReference Include="Diga.NativeControls.WebBrowser" Version="1.0.9" />
+    <PackageReference Include="Diga.WebView2.Wrapper" Version="9.0.1" />
     <PackageReference Include="EasyXMLSerializer" Version="1.0.9" />
-    <PackageReference Include="MimeTypeExtension" Version="1.0.23" />
+    <PackageReference Include="MimeTypeExtension" Version="1.0.26" />
   </ItemGroup>
 
   <ItemGroup>
