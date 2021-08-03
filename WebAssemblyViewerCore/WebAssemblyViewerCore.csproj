@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>WebAssemblyViewer</AssemblyName>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>App.ico</ApplicationIcon>
@@ -33,10 +33,11 @@
   <ItemGroup>
     <PackageReference Include="CoreWindowsWrapper" Version="1.0.47" />
     <PackageReference Include="Diga.Core.Api.Win32.Core" Version="1.0.26" />
-    <PackageReference Include="Diga.NativeControls.WebBrowser" Version="1.0.9" />
-    <PackageReference Include="Diga.WebView2.Wrapper" Version="9.0.1" />
+    <PackageReference Include="Diga.NativeControls.WebBrowser" Version="1.0.10" />
+    <PackageReference Include="Diga.WebView2.Interop" Version="10.0.1" />
+    <PackageReference Include="Diga.WebView2.Wrapper" Version="10.0.1" />
     <PackageReference Include="EasyXMLSerializer" Version="1.0.9" />
-    <PackageReference Include="MimeTypeExtension" Version="1.0.27" />
+    <PackageReference Include="MimeTypeExtension" Version="1.0.28" />
   </ItemGroup>
 
   <ItemGroup>
