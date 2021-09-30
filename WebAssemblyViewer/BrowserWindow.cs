@@ -54,6 +54,7 @@ namespace WebAssemblyViewer
             
 
             this.Controls.Add(this._Browser);
+            
         }
 
         private void OnPermissionRequested(object sender, PermissionRequestedEventArgs e)
