@@ -34,7 +34,7 @@ namespace WebAssemblyViewer
             this.Height = 600;
             this.StartUpPosition = WindowsStartupPosition.CenterScreen;
             this.IconFile = "App.ico";
-           
+            
 
             this._Browser = new NativeWebBrowser
             {
@@ -108,7 +108,7 @@ namespace WebAssemblyViewer
 
         private void OnWebWindowCreated(object sender, EventArgs e)
         {
-
+            
             if(this._Options.Monitoring)
             {
                 if(!TestUrl(this._Options.MonitoringUrl))

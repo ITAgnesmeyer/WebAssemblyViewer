@@ -227,7 +227,9 @@ namespace WebAssemblyViewer
                 Location = new Point(rightLeft, top),
                 Width = 300,
                 Height = 20
+               
             };
+
             this._TxtMonitoringUlr.Style |= WindowStylesConst.WS_BORDER;
 
             top += 30;
