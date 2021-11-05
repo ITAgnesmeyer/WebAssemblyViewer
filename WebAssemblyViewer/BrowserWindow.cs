@@ -75,7 +75,7 @@ namespace WebAssemblyViewer
         {
             Debug.Print("isRequested:" + e.IsRedirected);
             Debug.Print("IsuserIndended:" + e.IsUserInitiated);
-            Debug.Print("Url:" + e.Uri);
+            Debug.Print("Url:" + e.uri);
         }
 
         private void OnContentLoading(object sender, ContentLoadingEventArgs e)

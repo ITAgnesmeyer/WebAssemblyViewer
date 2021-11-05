@@ -37,9 +37,8 @@ namespace WebAssemblyViewer
                     return;
                 }
             }
-            
-            BrowserOptions opetions;
-            if (!LoadOptions(configFile, out opetions))
+
+            if (!LoadOptions(configFile, out BrowserOptions opetions))
             {
                 opetions = GetDefaultOptions();
                 if (WriteOptions(configFile, opetions))
@@ -77,10 +76,12 @@ namespace WebAssemblyViewer
                 {
                     if (WriteOptions(configFile, opetions))
                     {
-                        AppMessageBox mg = new AppMessageBox();
-                        mg.Caption = "Continue?";
-                        mg.Message =
-                            "The configuration has been saved.\nDo you want to start the App?\nClick Ok to start the Applicaiton.";
+                        AppMessageBox mg = new AppMessageBox
+                        {
+                            Caption = "Continue?",
+                            Message =
+                            "The configuration has been saved.\nDo you want to start the App?\nClick Ok to start the Applicaiton."
+                        };
                         NativeApp.Run(mg);
                         var result = mg.Result;
                         if (result == MessageBoxResult.Cancel)
@@ -149,7 +150,7 @@ namespace WebAssemblyViewer
         {
             Dictionary<string, string> retval = args.ToDictionary(
                 k => k.Split(new[] {':'}, 2)[0].ToLower(),
-                v => v.Split(new[] {':'}, 2).Count() > 1
+                v => v.Split(new[] { ':' }, 2).Length > 1
                     ? v.Split(new[] {':'}, 2)[1]
                     : null);
 
