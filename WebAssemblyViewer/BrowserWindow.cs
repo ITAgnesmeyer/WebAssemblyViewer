@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using CoreWindowsWrapper;
 using Diga.NativeControls.WebBrowser;
+using Diga.WebView2.Wrapper;
 using Diga.WebView2.Wrapper.EventArguments;
 
 namespace WebAssemblyViewer
@@ -51,10 +52,45 @@ namespace WebAssemblyViewer
             this._Browser.NavigationStart += OnNavigationStart;
             this._Browser.NavigationCompleted += OnNavigationCompleted;
             this._Browser.PermissionRequested += OnPermissionRequested;
-            
+            this._Browser.AcceleratorKeyPressed += OnAcceleratorKeyPressed;
 
             this.Controls.Add(this._Browser);
             
+        }
+        private const uint NoneStyle = 385941504;
+
+        private const uint NoneExStyle = 327680;
+
+        private uint OldStyle;
+        private uint OldExStyle;
+
+        private void OnAcceleratorKeyPressed(object sender, AcceleratorKeyPressedEventArgs e)
+        {
+            uint currentStyle = this.GetWindowStyle();
+            uint currentExStyle = this.GetWindowExStyle();
+            if (e.KeyVentType == KeyEventType.KeyDown && e.VirtualKey == Diga.Core.Api.Win32.VirtualKeys.VK_F11)
+            {
+                if (currentStyle == NoneStyle && currentExStyle == NoneExStyle)
+                {
+                    this.SetWindowState(WindowState.Normal);
+                    this.UpdateStyle(this.OldStyle);
+                    this.UpdateExStyle(this.OldExStyle);
+                    this.UpdateWidow();
+
+                }
+                else
+                {
+                    this.OldStyle = currentStyle;
+                    this.OldExStyle = currentExStyle;
+                    this.SetWindowState(WindowState.Maximized);
+                    this.UpdateStyle(NoneStyle);
+                    this.UpdateExStyle(NoneExStyle);
+                    this.UpdateWidow();
+
+                }
+
+                
+            }
         }
 
         private void OnPermissionRequested(object sender, PermissionRequestedEventArgs e)
