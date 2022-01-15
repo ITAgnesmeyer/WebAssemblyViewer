@@ -53,10 +53,19 @@ namespace WebAssemblyViewer
             this._Browser.NavigationCompleted += OnNavigationCompleted;
             this._Browser.PermissionRequested += OnPermissionRequested;
             this._Browser.AcceleratorKeyPressed += OnAcceleratorKeyPressed;
+            this._Browser.WebMessageReceived+=OnWebMessageReceived;
 
             this.Controls.Add(this._Browser);
             
         }
+
+        private void OnWebMessageReceived(object sender, WebMessageReceivedEventArgs e)
+        {
+            Debug.Print(e.Source);
+            Debug.Print(e.WebMessageAsJson);
+            //Debug.Print(e.WebMessageAsString);
+        }
+
         private const uint NoneStyle = 385941504;
 
         private const uint NoneExStyle = 327680;

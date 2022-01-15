@@ -9,19 +9,19 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
-    <Optimize>True</Optimize>
+    <Optimize>False</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
-    <Optimize>True</Optimize>
+    <Optimize>False</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net4.7.2|AnyCPU'">
-    <Optimize>True</Optimize>
+    <Optimize>False</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
-    <Optimize>True</Optimize>
+    <Optimize>False</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,9 +31,10 @@
 
   <ItemGroup>
     <PackageReference Include="CoreWindowsWrapper" Version="2.0.2" />
+    <PackageReference Include="Diga.Core.Api.Win32" Version="2.0.2" />
     <PackageReference Include="Diga.NativeControls.WebBrowser" Version="1.0.14" />
-    <PackageReference Include="Diga.WebView2.Interop" Version="14.0.1" />
-    <PackageReference Include="Diga.WebView2.Wrapper" Version="14.0.1" />
+    <PackageReference Include="Diga.WebView2.Interop" Version="15.0.1" />
+    <PackageReference Include="Diga.WebView2.Wrapper" Version="15.0.2" />
     <PackageReference Include="EasyXMLSerializer" Version="2.0.1" />
     <PackageReference Include="MimeTypeExtension" Version="1.0.28" />
   </ItemGroup>
