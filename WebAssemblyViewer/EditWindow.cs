@@ -7,18 +7,22 @@ namespace WebAssemblyViewer
     class EditWindow : NativeWindow
     {
         private NativeCheckBox _ChkMonitoring;
+        private NativeCheckBox _ChkStatusBar;
+        private NativeCheckBox _ChkAppStatusBar;
+        private NativeCheckBox _ChkDevTools;
+        private NativeCheckBox _ChkContextMenu;
+        private NativeCheckBox _ChkTopMost;
+        private NativeCheckBox _ChkMaximized;
         private NativeTextBox _TxtMonitoringUlr;
         private NativeTextBox _TxtUserDataFolder;
         private NativeButton _BnSelectUserDataFolder;
         private NativeTextBox _TxtBrowserExecutable;
         private NativeButton _BnSelectBrowserExecutable;
         private NativeTextBox _TxtTitle;
-        private NativeCheckBox _ChkStatusBar;
-        private NativeCheckBox _ChkAppStatusBar;
+
         private NativeTextBox _TxtMonitoringPath;
         private NativeTextBox _TxtUrl;
-        private NativeCheckBox _ChkDevTools;
-        private NativeCheckBox _ChkContextMenu;
+
         private NativeButton _BnSelectMonitoringPath;
         private BrowserOptions _Options;
         private NativeButton _BnOk;
@@ -42,6 +46,8 @@ namespace WebAssemblyViewer
             this._Options.ContextMenuEnable = this._ChkContextMenu.Checked;
             this._Options.StatusBar = this._ChkStatusBar.Checked;
             this._Options.AppStatusBar = this._ChkAppStatusBar.Checked;
+            this._Options.TopMost = this._ChkTopMost.Checked;
+            this._Options.Maximized = this._ChkMaximized.Checked;
             this._Options.BrowserUserDataFolder = this._TxtUserDataFolder.Text;
             this._Options.BrowserExecutableFolder = this._TxtBrowserExecutable.Text;
         }
@@ -59,6 +65,8 @@ namespace WebAssemblyViewer
             this._ChkContextMenu.Checked = this._Options.ContextMenuEnable;
             this._ChkStatusBar.Checked = this._Options.StatusBar;
             this._ChkAppStatusBar.Checked = this._Options.AppStatusBar;
+            this._ChkTopMost.Checked = this._Options.TopMost;
+            this._ChkMaximized.Checked = this._Options.Maximized;
         }
 
         protected override void OnBeforeCreate(BeforeWindowCreateEventArgs e)
@@ -69,7 +77,7 @@ namespace WebAssemblyViewer
         protected override void InitControls()
         {
             this.Text = "Configuration Editor";
-            this.Width = 480;
+            this.Width = 640;
             this.Height = 430;
             this.IconFile = "App.ico";
             this.StartUpPosition = WindowsStartupPosition.CenterScreen;
@@ -77,47 +85,67 @@ namespace WebAssemblyViewer
             int top = 10;
             int leftLeft = 10;
             int rightLeft = 120;
-
-
+            int textHeight = 20;
+            int lblWidth = 100;
+            int chkWidth = 95;
+            int inputWidth = this.Width - rightLeft - 50;
+            int chkLeft = leftLeft;
             this._ChkContextMenu = new NativeCheckBox
             {
-                Location = new Point(leftLeft, top),
-                Width = 100,
-                Height = 20,
+                Location = new Point(chkLeft, top),
+                Width = chkWidth,
+                Height = textHeight,
                 Text = "Context-Menu",
             };
             this._ChkContextMenu.Style |= WindowStylesConst.WS_TABSTOP;
+            chkLeft += this._ChkContextMenu.Width +10;
+            
             this._ChkDevTools = new NativeCheckBox
             {
-                Location = new Point(rightLeft, top),
-                Width = 100,
-                Height = 20,
+                Location = new Point(chkLeft, top),
+                Width = chkWidth,
+                Height = textHeight,
                 Text = "Dev-Tools"
             };
-
+            chkLeft += this._ChkDevTools.Width +10;
             this._ChkStatusBar = new NativeCheckBox
             {
-                Location = new Point(rightLeft + 110, top),
-                Width = 100,
-                Height = 20,
+                Location = new Point(chkLeft, top),
+                Width = chkWidth,
+                Height = textHeight,
                 Text = "Statusbar"
             };
 
-
+            chkLeft += this._ChkStatusBar.Width +10;
             this._ChkAppStatusBar = new NativeCheckBox
             {
-                Location = new Point(this._ChkStatusBar.Left + this._ChkStatusBar.Width + 10, top),
-                Width = 100,
-                Height = 20,
+                Location = new Point(chkLeft, top),
+                Width = chkWidth,
+                Height = textHeight,
                 Text = "App-Statusbar"
             };
-
+            chkLeft += this._ChkAppStatusBar.Width +10;
+            this._ChkTopMost = new NativeCheckBox
+            {
+                Location = new Point(chkLeft, top),
+                Width = chkWidth,
+                Height = textHeight,
+                Text = "Topmost"
+            };
+            chkLeft += this._ChkTopMost.Width +10;
+            this._ChkMaximized = new NativeCheckBox
+            {
+                Location = new Point(chkLeft, top),
+                Width = chkWidth,
+                Height = textHeight,
+                Text = "Maximized"
+            };
             top += 30;
             NativeLabel lblTitle = new NativeLabel
             {
                 Location = new Point(leftLeft, top),
-                Width = 100,
-                Height = 20,
+                Width = lblWidth,
+                Height = textHeight,
                 Text = "Title:",
                 BackColor = this.BackColor
             };
@@ -125,8 +153,8 @@ namespace WebAssemblyViewer
             this._TxtTitle = new NativeTextBox
             {
                 Location = new Point(rightLeft, top),
-                Width = 300,
-                Height = 20,
+                Width = inputWidth,
+                Height = textHeight,
             };
             this._TxtTitle.Style |= WindowStylesConst.WS_BORDER;
 
@@ -135,8 +163,8 @@ namespace WebAssemblyViewer
             NativeLabel lblUrl = new NativeLabel
             {
                 Location = new Point(leftLeft, top),
-                Width = 100,
-                Height = 20,
+                Width = lblWidth,
+                Height = textHeight,
                 Text = "Url:",
                 BackColor = this.BackColor
             };
@@ -144,8 +172,8 @@ namespace WebAssemblyViewer
             this._TxtUrl = new NativeTextBox
             {
                 Location = new Point(rightLeft, top),
-                Width = 300,
-                Height = 20
+                Width = inputWidth,
+                Height = textHeight
             };
             this._TxtUrl.Style |= WindowStylesConst.WS_BORDER;
 
@@ -154,8 +182,8 @@ namespace WebAssemblyViewer
             NativeLabel lblUserFolder = new NativeLabel
             {
                 Location = new Point(leftLeft, top),
-                Width = 100,
-                Height = 20,
+                Width = lblWidth,
+                Height = textHeight,
                 Text = "Data-Folder:",
                 BackColor = this.BackColor
             };
@@ -163,16 +191,16 @@ namespace WebAssemblyViewer
             this._TxtUserDataFolder = new NativeTextBox
             {
                 Location = new Point(rightLeft, top),
-                Width = 300,
-                Height = 20
+                Width = inputWidth,
+                Height = textHeight
             };
             this._TxtUserDataFolder.Style |= WindowStylesConst.WS_BORDER;
 
             this._BnSelectUserDataFolder = new NativeButton
             {
-                Location = new Point(rightLeft + 301, top),
+                Location = new Point(rightLeft + inputWidth + 1, top),
                 Width = 25,
-                Height = 20,
+                Height = textHeight,
                 Text = "…"
             };
             this._BnSelectUserDataFolder.Clicked += BnSelectUserDataFolder_Clicked;
@@ -181,8 +209,8 @@ namespace WebAssemblyViewer
             NativeLabel lblBrowserExecutable = new NativeLabel
             {
                 Location = new Point(leftLeft, top),
-                Width = 100,
-                Height = 20,
+                Width = lblWidth,
+                Height = textHeight,
                 Text = "Browser-Folder:",
                 BackColor = this.BackColor
             };
@@ -190,16 +218,16 @@ namespace WebAssemblyViewer
             this._TxtBrowserExecutable = new NativeTextBox
             {
                 Location = new Point(rightLeft, top),
-                Width = 300,
-                Height = 20
+                Width = inputWidth,
+                Height = textHeight
             };
             this._TxtBrowserExecutable.Style |= WindowStylesConst.WS_BORDER;
 
             this._BnSelectBrowserExecutable = new NativeButton
             {
-                Location = new Point(rightLeft + 301, top),
+                Location = new Point(rightLeft + inputWidth + 1, top),
                 Width = 25,
-                Height = 20,
+                Height = textHeight,
                 Text = "…"
             };
             this._BnSelectBrowserExecutable.Clicked += BnSelectBrowserExecutable_Clicked;
@@ -208,8 +236,8 @@ namespace WebAssemblyViewer
             this._ChkMonitoring = new NativeCheckBox
             {
                 Location = new Point(leftLeft, top),
-                Width = 100,
-                Height = 20,
+                Width = lblWidth,
+                Height = textHeight,
                 Text = "Monitoring"
             };
 
@@ -217,16 +245,16 @@ namespace WebAssemblyViewer
             NativeLabel lblMonitoriingUrl = new NativeLabel
             {
                 Location = new Point(leftLeft, top),
-                Width = 100,
-                Height = 20,
+                Width = lblWidth,
+                Height = textHeight,
                 Text = "Monitoring-Url:",
                 BackColor = this.BackColor
             };
             this._TxtMonitoringUlr = new NativeTextBox
             {
                 Location = new Point(rightLeft, top),
-                Width = 300,
-                Height = 20
+                Width = inputWidth,
+                Height = textHeight
                
             };
 
@@ -236,8 +264,8 @@ namespace WebAssemblyViewer
             NativeLabel lblMonitoriingPath = new NativeLabel
             {
                 Location = new Point(leftLeft, top),
-                Width = 100,
-                Height = 20,
+                Width = lblWidth,
+                Height = textHeight,
                 Text = "Monitoring-Path:",
                 BackColor = this.BackColor
             };
@@ -245,16 +273,16 @@ namespace WebAssemblyViewer
             this._TxtMonitoringPath = new NativeTextBox
             {
                 Location = new Point(rightLeft, top),
-                Width = 300,
-                Height = 20
+                Width = inputWidth,
+                Height = textHeight
             };
             this._TxtMonitoringPath.Style |= WindowStylesConst.WS_BORDER;
 
             this._BnSelectMonitoringPath = new NativeButton
             {
-                Location = new Point(rightLeft + 301, top),
+                Location = new Point(rightLeft + inputWidth + 1, top),
                 Width = 25,
-                Height = 20,
+                Height = textHeight,
                 Text = "…"
             };
             this._BnSelectMonitoringPath.Clicked += BnSelectMonitoringPath_Click;
@@ -283,6 +311,8 @@ namespace WebAssemblyViewer
             this.Controls.Add(this._ChkDevTools);
             this.Controls.Add(this._ChkStatusBar);
             this.Controls.Add(this._ChkAppStatusBar);
+            this.Controls.Add(this._ChkTopMost);
+            this.Controls.Add(this._ChkMaximized);
             this.Controls.Add(lblTitle);
             this.Controls.Add(this._TxtTitle);
             this.Controls.Add(lblUrl);

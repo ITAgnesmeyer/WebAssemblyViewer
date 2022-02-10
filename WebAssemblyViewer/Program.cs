@@ -110,7 +110,10 @@ namespace WebAssemblyViewer
                 ContextMenuEnable = true,
                 BrowserUserDataFolder = "",
                 BrowserExecutableFolder = "",
-                AppStatusBar=false
+                AppStatusBar=false,
+                Maximized = false,
+                TopMost = false
+                
             };
         }
 

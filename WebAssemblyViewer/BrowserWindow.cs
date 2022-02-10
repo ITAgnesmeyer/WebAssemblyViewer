@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using CoreWindowsWrapper;
+using Diga.Core.Api.Win32;
 using Diga.NativeControls.WebBrowser;
 using Diga.WebView2.Wrapper;
 using Diga.WebView2.Wrapper.EventArguments;
@@ -75,26 +77,26 @@ namespace WebAssemblyViewer
 
         private void OnAcceleratorKeyPressed(object sender, AcceleratorKeyPressedEventArgs e)
         {
-            uint currentStyle = this.GetWindowStyle();
-            uint currentExStyle = this.GetWindowExStyle();
-            if (e.KeyVentType == KeyEventType.KeyDown && e.VirtualKey == Diga.Core.Api.Win32.VirtualKeys.VK_F11)
+            uint currentStyle = GetWindowStyle();
+            uint currentExStyle = GetWindowExStyle();
+            if (e.KeyVentType == KeyEventType.KeyDown && e.VirtualKey == VirtualKeys.VK_F11)
             {
                 if (currentStyle == NoneStyle && currentExStyle == NoneExStyle)
                 {
-                    this.SetWindowState(WindowState.Normal);
-                    this.UpdateStyle(this.OldStyle);
-                    this.UpdateExStyle(this.OldExStyle);
-                    this.UpdateWidow();
+                    SetWindowState(WindowState.Normal);
+                    UpdateStyle(this.OldStyle);
+                    UpdateExStyle(this.OldExStyle);
+                    UpdateWidow();
 
                 }
                 else
                 {
                     this.OldStyle = currentStyle;
                     this.OldExStyle = currentExStyle;
-                    this.SetWindowState(WindowState.Maximized);
-                    this.UpdateStyle(NoneStyle);
-                    this.UpdateExStyle(NoneExStyle);
-                    this.UpdateWidow();
+                    SetWindowState(WindowState.Maximized);
+                    UpdateStyle(NoneStyle);
+                    UpdateExStyle(NoneExStyle);
+                    UpdateWidow();
 
                 }
 
@@ -134,20 +136,20 @@ namespace WebAssemblyViewer
             string message = "Process Error:";
             switch(e.ProcessFailedKind)
             {
-                case Diga.WebView2.Wrapper.ProcessFailedKind.BrowserProcessExited:
+                case ProcessFailedKind.BrowserProcessExited:
                     message += "Browser Process Exited!";
                     break;
-                case Diga.WebView2.Wrapper.ProcessFailedKind.RenderProcessExited:
+                case ProcessFailedKind.RenderProcessExited:
                     message += "Render Process Exited!";
                     break;
-                case Diga.WebView2.Wrapper.ProcessFailedKind.RenderProcessUnresponsive:
+                case ProcessFailedKind.RenderProcessUnresponsive:
                     message += "Render Process Unresponsive!";
                     break;
             }
 
             string messageAll = $"A critical Error occured!\n{message}\nThe application will be closed!";
             MessageBox.Show(this.Handle, messageAll, "Process Failed!", MessageBoxOptions.OkOnly | MessageBoxOptions.IconError);
-            this.Close();
+            Close();
 
         }
 
@@ -186,9 +188,52 @@ namespace WebAssemblyViewer
             }
             this._Browser.DevToolsEnabled = this._Options.DevToolsEnable;
             this._Browser.DefaultContextMenusEnabled = this._Options.ContextMenuEnable;
+            
+            //this.Width += 1;
+            this.Visible = false;
+            if (this._Options.Maximized)
+            {
+                this.SetWindowState(WindowState.Maximized);
+                this.UpdateStyle(NoneStyle);
+                //+ unchecked((uint)0x00000008L)
+                this.UpdateExStyle(NoneExStyle );
+                this.UpdateWidow();
+                this._Browser.AcceleratorKeyPressed -= OnAcceleratorKeyPressed;
+                IntPtr hMon = User32.MonitorFromWindow(this.Handle,
+                    MonitorDefaultFlags.MONITOR_DEFAULTTONEAREST);
+                if (hMon != IntPtr.Zero)
+                {
+                    MonitorInfo info = new MonitorInfo();
+                    info.cbSize = (uint)Marshal.SizeOf(info);
+                    if (User32.GetMonitorInfo(hMon, ref info))
+                    {
+                        Rect r = info.rcMonitor;
+                        this.Left = r.Left;
+                        this.Top = r.Top;
+                        this.Width = r.Width;
+                        this.Height = r.Height;
+                    }
+
+                }
+
+            }
+
+            if (this._Options.TopMost)
+            {
+                uint style = GetWindowExStyle();
+                style = style | unchecked((uint)0x00000008L);
+                
+                this.UpdateExStyle(style );
+                
+            }
+
+            this.Visible = true;
+            
             this._Browser.Navigate(this._Options.Url);
-            this.Width += 1;
-           
+            
+            
+            //this.Top = 0;
+            //this.Left = 0;
         }
 
         private bool TestUrl(string url)

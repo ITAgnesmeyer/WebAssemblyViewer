@@ -13,6 +13,9 @@
         public string BrowserExecutableFolder { get; set; }
         public bool DevToolsEnable { get; set; }
         public bool ContextMenuEnable { get; set; }
+        public bool Maximized { get; set; }
+        public bool TopMost { get; set; }
+
         
     }
 }
