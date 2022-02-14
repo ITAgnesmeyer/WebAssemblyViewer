@@ -221,7 +221,7 @@ namespace WebAssemblyViewer
             if (this._Options.TopMost)
             {
                 uint style = GetWindowExStyle();
-                style = style | unchecked((uint)0x00000008L);
+                style |= unchecked((uint)0x00000008L);
                 
                 this.UpdateExStyle(style );
                 
