@@ -90,6 +90,10 @@ namespace WebAssemblyViewer
                         }
                     }
                 }
+                else
+                {
+                    return;
+                }
             }
 
             BrowserWindow bw = new BrowserWindow(opetions);

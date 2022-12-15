@@ -1,6 +1,8 @@
 ﻿using CoreWindowsWrapper;
 using Diga.Core.Api.Win32;
 using System;
+using System.Diagnostics;
+using Point = Diga.Core.Api.Win32.Point;
 
 namespace WebAssemblyViewer
 {
@@ -24,10 +26,10 @@ namespace WebAssemblyViewer
         private NativeTextBox _TxtUrl;
 
         private NativeButton _BnSelectMonitoringPath;
-        private BrowserOptions _Options;
+        private readonly BrowserOptions _Options;
         private NativeButton _BnOk;
         private NativeButton _BnCancel;
-
+        private NativeLink _LinkButton;
         public bool Result { get; private set; }
 
         public EditWindow(BrowserOptions options) 
@@ -288,6 +290,16 @@ namespace WebAssemblyViewer
             this._BnSelectMonitoringPath.Clicked += BnSelectMonitoringPath_Click;
 
             top += 30;
+            this._LinkButton = new NativeLink
+            {
+                Location = new Point(leftLeft, top),
+                Width = inputWidth -100,
+                Height = textHeight,
+                Text = "WebView2=><A ID=\"DLB\" HREF=\"https://go.microsoft.com/fwlink/p/?LinkId=2124703\">Download Bootstrap</A> or <A ID=\"DLL\" HREF=\"https://developer.microsoft.com/de-de/microsoft-edge/webview2/#download-section\">GoTo Webview2 Download</A>",
+                ForeColor = CoreWindowsWrapper.Tools.ColorTool.Blue
+            };
+
+            this._LinkButton.LinkClicked += OnLinkClick;
             this._BnOk = new NativeButton
             {
                 Width = 80,
@@ -329,8 +341,13 @@ namespace WebAssemblyViewer
             this.Controls.Add(lblMonitoriingPath);
             this.Controls.Add(this._TxtMonitoringPath);
             this.Controls.Add(this._BnSelectMonitoringPath);
-
+            this.Controls.Add(this._LinkButton);
             this.Controls.Add(this._BnCancel);
+        }
+
+        private void OnLinkClick(object sender, NativeLinkClickEventArgs e)
+        {
+            Process.Start(e.Url);
         }
 
         private void BnSelectBrowserExecutable_Clicked(object sender, EventArgs e)
