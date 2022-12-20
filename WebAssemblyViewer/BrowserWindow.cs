@@ -88,6 +88,7 @@ namespace WebAssemblyViewer
             this._Browser.NavigationCompleted += OnNavigationCompleted;
             this._Browser.PermissionRequested += OnPermissionRequested;
             this._Browser.AcceleratorKeyPressed += OnAcceleratorKeyPressed;
+            this._Browser.AcceleratorKeyPressed += OnAcceleratorKeyPressedF4;
             this._Browser.WebMessageReceived += OnWebMessageReceived;
             this._Browser.ContextMenuRequested += OnContextMentRequested;
 
@@ -150,10 +151,37 @@ namespace WebAssemblyViewer
         private uint OldStyle;
         private uint OldExStyle;
 
+        private void OnAcceleratorKeyPressedF4(object sender, AcceleratorKeyPressedEventArgs e)
+        {
+            
+            if (e.KeyVentType == KeyEventType.SystemKeyDown && e.VirtualKey == VirtualKeys.VK_F4)
+            {
+                if (this._Options.DisableF4)
+                {
+                    Diga.Core.Threading.UIDispatcher.UIThread.Post(() =>
+                    {
+                        DOMWindow win = this._Browser.GetDOMWindow();
+
+                        string val = win.prompt("Enter your Password!","");
+                        val = val.Replace("\"", "");
+                        if (val == this._Options.DisableF4Password)
+                        {
+                            this.Close();
+                        }
+                    });
+                    
+
+                    e.Handled = true;    
+                    
+                }
+                
+            }
+        }
         private void OnAcceleratorKeyPressed(object sender, AcceleratorKeyPressedEventArgs e)
         {
             uint currentStyle = GetWindowStyle();
             uint currentExStyle = GetWindowExStyle();
+            
             if (e.KeyVentType == KeyEventType.KeyDown && e.VirtualKey == VirtualKeys.VK_F11)
             {
                 if (currentStyle == NoneStyle && currentExStyle == NoneExStyle)

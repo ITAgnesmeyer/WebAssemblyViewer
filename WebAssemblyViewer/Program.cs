@@ -116,7 +116,9 @@ namespace WebAssemblyViewer
                 BrowserExecutableFolder = "",
                 AppStatusBar=false,
                 Maximized = false,
-                TopMost = false
+                TopMost = false,
+                DisableF4 = false,
+                DisableF4Password = string.Empty
                 
             };
         }

@@ -15,6 +15,8 @@ namespace WebAssemblyViewer
         private NativeCheckBox _ChkContextMenu;
         private NativeCheckBox _ChkTopMost;
         private NativeCheckBox _ChkMaximized;
+        private NativeCheckBox _ChkDisableF4;
+        private NativeTextBox _TxtDisableF4Password;
         private NativeTextBox _TxtMonitoringUlr;
         private NativeTextBox _TxtUserDataFolder;
         private NativeButton _BnSelectUserDataFolder;
@@ -52,6 +54,8 @@ namespace WebAssemblyViewer
             this._Options.Maximized = this._ChkMaximized.Checked;
             this._Options.BrowserUserDataFolder = this._TxtUserDataFolder.Text;
             this._Options.BrowserExecutableFolder = this._TxtBrowserExecutable.Text;
+            this._Options.DisableF4 = this._ChkDisableF4.Checked;
+            this._Options.DisableF4Password = this._TxtDisableF4Password.Text;
         }
 
         private void OptionsToView()
@@ -69,6 +73,8 @@ namespace WebAssemblyViewer
             this._ChkAppStatusBar.Checked = this._Options.AppStatusBar;
             this._ChkTopMost.Checked = this._Options.TopMost;
             this._ChkMaximized.Checked = this._Options.Maximized;
+            this._ChkDisableF4.Checked = this._Options.DisableF4;
+            this._TxtDisableF4Password.Text = this._Options.DisableF4Password;
         }
 
         protected override void OnBeforeCreate(BeforeWindowCreateEventArgs e)
@@ -142,7 +148,30 @@ namespace WebAssemblyViewer
                 Height = textHeight,
                 Text = "Maximized"
             };
+            chkLeft = leftLeft;
+
             top += 30;
+            this._ChkDisableF4 = new NativeCheckBox()
+            {
+                Location = new Point(chkLeft, top),
+                Width = chkWidth,
+                Height = textHeight,
+                Text = "Disable F4"
+            };
+
+            chkLeft += this._ChkDisableF4.Width + 10;
+            this._TxtDisableF4Password = new NativeTextBox
+            {
+                Location = new Point(chkLeft, top),
+                Width = chkWidth * 2,
+                Height = textHeight,
+                Text = ""    
+            };
+            this._TxtDisableF4Password.Style |= EditBoxStyles.ES_PASSWORD | WindowStylesConst.WS_BORDER;
+            
+
+            top += 30;
+
             NativeLabel lblTitle = new NativeLabel
             {
                 Location = new Point(leftLeft, top),
@@ -325,6 +354,8 @@ namespace WebAssemblyViewer
             this.Controls.Add(this._ChkAppStatusBar);
             this.Controls.Add(this._ChkTopMost);
             this.Controls.Add(this._ChkMaximized);
+            this.Controls.Add(this._ChkDisableF4);
+            this.Controls.Add(this._TxtDisableF4Password);
             this.Controls.Add(lblTitle);
             this.Controls.Add(this._TxtTitle);
             this.Controls.Add(lblUrl);
@@ -347,13 +378,19 @@ namespace WebAssemblyViewer
 
         private void OnLinkClick(object sender, NativeLinkClickEventArgs e)
         {
-            Process.Start(e.Url);
+            var p = new ProcessStartInfo(e.Url)
+            {
+                UseShellExecute = true
+            };
+            Process.Start(p);
         }
 
         private void BnSelectBrowserExecutable_Clicked(object sender, EventArgs e)
         {
-            OpenFolderDialog ofd = new OpenFolderDialog();
-            ofd.Caption = "Select Browser-Executable-Folder Path";
+            OpenFolderDialog ofd = new OpenFolderDialog
+            {
+                Caption = "Select Browser-Executable-Folder Path"
+            };
             if (ofd.Show(this))
             {
                 this._TxtBrowserExecutable.Text = ofd.SelectedPath;
@@ -362,8 +399,10 @@ namespace WebAssemblyViewer
 
         private void BnSelectUserDataFolder_Clicked(object sender, EventArgs e)
         {
-            OpenFolderDialog ofd = new OpenFolderDialog();
-            ofd.Caption = "Select User-Data-Folder Path";
+            OpenFolderDialog ofd = new OpenFolderDialog
+            {
+                Caption = "Select User-Data-Folder Path"
+            };
             if (ofd.Show(this))
             {
                 this._TxtUserDataFolder.Text = ofd.SelectedPath;
@@ -392,8 +431,10 @@ namespace WebAssemblyViewer
 
         private void BnSelectMonitoringPath_Click(object sender, EventArgs e)
         {
-            OpenFolderDialog ofd = new OpenFolderDialog();
-            ofd.Caption = "Select Monitoring Path";
+            OpenFolderDialog ofd = new OpenFolderDialog
+            {
+                Caption = "Select Monitoring Path"
+            };
             if (ofd.Show(this))
             {
                 this._TxtMonitoringPath.Text = ofd.SelectedPath;

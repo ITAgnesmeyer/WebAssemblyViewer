@@ -16,6 +16,9 @@
         public bool Maximized { get; set; }
         public bool TopMost { get; set; }
 
+        public bool DisableF4 { get; set; }
+        public string DisableF4Password { get; set; }
+
         
     }
 }
