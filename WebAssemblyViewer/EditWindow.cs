@@ -16,6 +16,7 @@ namespace WebAssemblyViewer
         private NativeCheckBox _ChkTopMost;
         private NativeCheckBox _ChkMaximized;
         private NativeCheckBox _ChkDisableF4;
+        private NativeCheckBox _ChkEnableF4WithPw;
         private NativeTextBox _TxtDisableF4Password;
         private NativeTextBox _TxtMonitoringUlr;
         private NativeTextBox _TxtUserDataFolder;
@@ -55,6 +56,7 @@ namespace WebAssemblyViewer
             this._Options.BrowserUserDataFolder = this._TxtUserDataFolder.Text;
             this._Options.BrowserExecutableFolder = this._TxtBrowserExecutable.Text;
             this._Options.DisableF4 = this._ChkDisableF4.Checked;
+            this._Options.EnableF4Password = this._ChkEnableF4WithPw.Checked;
             this._Options.DisableF4Password = this._TxtDisableF4Password.Text;
         }
 
@@ -74,6 +76,7 @@ namespace WebAssemblyViewer
             this._ChkTopMost.Checked = this._Options.TopMost;
             this._ChkMaximized.Checked = this._Options.Maximized;
             this._ChkDisableF4.Checked = this._Options.DisableF4;
+            this._ChkEnableF4WithPw.Checked = this._Options.EnableF4Password;
             this._TxtDisableF4Password.Text = this._Options.DisableF4Password;
         }
 
@@ -154,18 +157,28 @@ namespace WebAssemblyViewer
             this._ChkDisableF4 = new NativeCheckBox()
             {
                 Location = new Point(chkLeft, top),
-                Width = chkWidth,
+                Width = chkWidth ,
                 Height = textHeight,
                 Text = "Disable F4"
             };
 
             chkLeft += this._ChkDisableF4.Width + 10;
+
+            this._ChkEnableF4WithPw = new NativeCheckBox()
+            {
+                Location = new Point(chkLeft, top),
+                Width = chkWidth,
+                Height = textHeight,
+                Text = "PW Enable F4"
+            };
+            chkLeft += this._ChkEnableF4WithPw.Width + 10;
             this._TxtDisableF4Password = new NativeTextBox
             {
                 Location = new Point(chkLeft, top),
                 Width = chkWidth * 2,
                 Height = textHeight,
-                Text = ""    
+                Text = "",
+                
             };
             this._TxtDisableF4Password.Style |= EditBoxStyles.ES_PASSWORD | WindowStylesConst.WS_BORDER;
             
@@ -355,6 +368,7 @@ namespace WebAssemblyViewer
             this.Controls.Add(this._ChkTopMost);
             this.Controls.Add(this._ChkMaximized);
             this.Controls.Add(this._ChkDisableF4);
+            this.Controls.Add(this._ChkEnableF4WithPw);
             this.Controls.Add(this._TxtDisableF4Password);
             this.Controls.Add(lblTitle);
             this.Controls.Add(this._TxtTitle);

@@ -156,19 +156,23 @@ namespace WebAssemblyViewer
             
             if (e.KeyVentType == KeyEventType.SystemKeyDown && e.VirtualKey == VirtualKeys.VK_F4)
             {
-                if (this._Options.DisableF4)
+                if (this._Options.DisableF4 )
                 {
-                    Diga.Core.Threading.UIDispatcher.UIThread.Post(() =>
+                    if (this._Options.EnableF4Password)
                     {
-                        DOMWindow win = this._Browser.GetDOMWindow();
-
-                        string val = win.prompt("Enter your Password!","");
-                        val = val.Replace("\"", "");
-                        if (val == this._Options.DisableF4Password)
+                        Diga.Core.Threading.UIDispatcher.UIThread.Post(() =>
                         {
-                            this.Close();
-                        }
-                    });
+                            DOMWindow win = this._Browser.GetDOMWindow();
+
+                            string val = win.prompt("Enter your Password!","");
+                            val = val.Replace("\"", "");
+                            if (val == this._Options.DisableF4Password)
+                            {
+                                this.Close();
+                            }
+                        });
+
+                    }
                     
 
                     e.Handled = true;    
