@@ -7,8 +7,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>App.ico</ApplicationIcon>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <AssemblyVersion>1.0.1.2</AssemblyVersion>
-    <FileVersion>1.0.1.2</FileVersion>
+    <AssemblyVersion>1.0.1.3</AssemblyVersion>
+    <FileVersion>1.0.1.3</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
@@ -35,9 +35,9 @@
   <ItemGroup>
     <PackageReference Include="CoreWindowsWrapper" Version="2.0.3" />
     <PackageReference Include="Diga.Core.Api.Win32" Version="2.0.6" />
-    <PackageReference Include="Diga.NativeControls.WebBrowser" Version="1.1.23" />
-    <PackageReference Include="Diga.WebView2.Interop" Version="20.1.0" />
-    <PackageReference Include="Diga.WebView2.Wrapper" Version="20.1.0" />
+    <PackageReference Include="Diga.NativeControls.WebBrowser" Version="1.1.24" />
+    <PackageReference Include="Diga.WebView2.Interop" Version="20.1.1" />
+    <PackageReference Include="Diga.WebView2.Wrapper" Version="20.1.1" />
     <PackageReference Include="EasyXMLSerializer" Version="2.0.4" />
     <PackageReference Include="MimeTypeExtension" Version="1.0.29" />
   </ItemGroup>
