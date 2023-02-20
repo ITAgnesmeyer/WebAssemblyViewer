@@ -37,7 +37,7 @@
     <PackageReference Include="Diga.Core.Api.Win32" Version="2.0.6" />
     <PackageReference Include="Diga.NativeControls.WebBrowser" Version="1.1.24" />
     <PackageReference Include="Diga.WebView2.Interop" Version="20.1.1" />
-    <PackageReference Include="Diga.WebView2.Wrapper" Version="20.1.1" />
+    <PackageReference Include="Diga.WebView2.Wrapper" Version="20.1.2" />
     <PackageReference Include="EasyXMLSerializer" Version="2.0.4" />
     <PackageReference Include="MimeTypeExtension" Version="1.0.29" />
   </ItemGroup>
