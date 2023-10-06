@@ -105,10 +105,10 @@ namespace WebAssemblyViewer
             return new BrowserOptions
             {
                 Title = "My Application",
-                Monitoring = false,
+                Monitoring = true,
                 MonitoringPath = "",
                 MonitoringUrl = "",
-                Url = "https://www.itagnesmeyer.de",
+                Url = "https://localhost:1/php_rest.php",
                 StatusBar = true,
                 DevToolsEnable = true,
                 ContextMenuEnable = true,
@@ -118,7 +118,12 @@ namespace WebAssemblyViewer
                 Maximized = false,
                 TopMost = false,
                 DisableF4 = false,
-                DisableF4Password = string.Empty
+                DisableF4Password = string.Empty,
+                CgiFileExtensions = {"php"},
+                CgiMonitoringUrl = "https://localhost:1",
+                CgiExeFile = "c:\\php\\php-cgi.exe",
+                CgiMonitoringFolder = "c:\\temp"
+                
                 
             };
         }

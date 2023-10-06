@@ -1,7 +1,9 @@
 ﻿using CoreWindowsWrapper;
 using Diga.Core.Api.Win32;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+
 using Point = Diga.Core.Api.Win32.Point;
 
 namespace WebAssemblyViewer
@@ -29,6 +31,13 @@ namespace WebAssemblyViewer
         private NativeTextBox _TxtUrl;
 
         private NativeButton _BnSelectMonitoringPath;
+        private NativeCheckBox _ChkCgiMoitoring;
+        private NativeTextBox _TxtCgiMonitoringPath;
+        private NativeButton _BnSelectCgiMonitoringPath;
+        private NativeTextBox _TxtCgiExeFile;
+        private NativeButton _BnSelectCgiExeFile;
+        private NativeTextBox _TxtCgiFileExtensions;
+        private NativeTextBox _TxtCgiMonitoringUrl;
         private readonly BrowserOptions _Options;
         private NativeButton _BnOk;
         private NativeButton _BnCancel;
@@ -58,8 +67,28 @@ namespace WebAssemblyViewer
             this._Options.DisableF4 = this._ChkDisableF4.Checked;
             this._Options.EnableF4Password = this._ChkEnableF4WithPw.Checked;
             this._Options.DisableF4Password = this._TxtDisableF4Password.Text;
+            this._Options.EnableCgi = this._ChkCgiMoitoring.Checked;
+            this._Options.CgiMonitoringFolder = this._TxtCgiMonitoringPath.Text;
+            this._Options.CgiExeFile = this._TxtCgiExeFile.Text;
+            this._Options.CgiFileExtensions = GetExtensionsFromExtensionText(this._TxtCgiFileExtensions.Text);
+            this._Options.CgiMonitoringUrl = this._TxtCgiMonitoringUrl.Text;
         }
 
+        private string GetTextFromMointoringExtensions(List<string> extensions)
+        {
+            if (extensions == null)
+            {
+                return string.Empty;
+            }
+            return string.Join(";", extensions);
+        }
+
+        private List<string> GetExtensionsFromExtensionText(string extension)
+        {
+            if (string.IsNullOrEmpty(extension))
+                return null;
+            return new List<string>(extension.Split(';'));
+        }
         private void OptionsToView()
         {
             this._ChkMonitoring.Checked = this._Options.Monitoring;
@@ -78,6 +107,11 @@ namespace WebAssemblyViewer
             this._ChkDisableF4.Checked = this._Options.DisableF4;
             this._ChkEnableF4WithPw.Checked = this._Options.EnableF4Password;
             this._TxtDisableF4Password.Text = this._Options.DisableF4Password;
+            this._ChkCgiMoitoring.Checked = this._Options.EnableCgi;
+            this._TxtCgiMonitoringPath.Text = this._Options.CgiMonitoringFolder;
+            this._TxtCgiExeFile.Text = this._Options.CgiExeFile;
+            this._TxtCgiFileExtensions.Text = GetTextFromMointoringExtensions(this._Options.CgiFileExtensions);
+            this._TxtCgiMonitoringUrl.Text = this._Options.CgiMonitoringUrl;
         }
 
         protected override void OnBeforeCreate(BeforeWindowCreateEventArgs e)
@@ -332,6 +366,102 @@ namespace WebAssemblyViewer
             this._BnSelectMonitoringPath.Clicked += BnSelectMonitoringPath_Click;
 
             top += 30;
+            this._ChkCgiMoitoring = new NativeCheckBox
+            {
+                Location = new Point(leftLeft, top),
+                Width = lblWidth,
+                Height = textHeight,
+                Text = "CGI-Monitoring"
+
+            };
+            top += 30;
+            NativeLabel lblCgiMonitoriingPath = new NativeLabel
+            {
+                Location = new Point(leftLeft, top),
+                Width = lblWidth,
+                Height = textHeight,
+                Text = "CGI-Mon.-Path:",
+                BackColor = this.BackColor
+            };
+
+            this._TxtCgiMonitoringPath = new NativeTextBox
+            {
+                Location = new Point(rightLeft, top),
+                Width = inputWidth,
+                Height = textHeight
+            };
+            this._TxtCgiMonitoringPath.Style |= WindowStylesConst.WS_BORDER;
+
+            this._BnSelectCgiMonitoringPath = new NativeButton
+            {
+                Location = new Point(rightLeft + inputWidth + 1, top),
+                Width = 25,
+                Height = textHeight,
+                Text = "…"
+            };
+            this._BnSelectCgiMonitoringPath.Clicked += BnSelectCgiMonitoringPath_Click;
+
+            top += 30;
+
+            NativeLabel lblCgiExeFile = new NativeLabel
+            {
+                Location = new Point(leftLeft, top),
+                Width = lblWidth,
+                Height = textHeight,
+                Text = "CGI-EXE:",
+                BackColor = this.BackColor
+            };
+            this._TxtCgiExeFile = new NativeTextBox
+            {
+                Location = new Point(rightLeft, top),
+                Width = inputWidth,
+                Height = textHeight
+            };
+            this._TxtCgiExeFile.Style |= WindowStylesConst.WS_BORDER;
+
+            this._BnSelectCgiExeFile = new NativeButton
+            {
+                Location = new Point(rightLeft + inputWidth + 1, top),
+                Width = 25,
+                Height = textHeight,
+                Text = "…"
+            };
+            this._BnSelectCgiExeFile.Clicked += BnSelectCgiExeFile_Clicked;
+            top += 30;
+            NativeLabel lblCgiFileExtension = new NativeLabel
+            {
+                Location = new Point(leftLeft, top),
+                Width = lblWidth,
+                Height = textHeight,
+                Text = "CGI-Extensions:",
+                BackColor = this.BackColor
+            };
+            this._TxtCgiFileExtensions = new NativeTextBox
+            {
+                Location = new Point(rightLeft, top),
+                Width = inputWidth,
+                Height = textHeight
+            };
+            this._TxtCgiFileExtensions.Style |= WindowStylesConst.WS_BORDER;
+            top += 30;
+            NativeLabel lblCgiMonitoringUrl= new NativeLabel
+            {
+                Location = new Point(leftLeft, top),
+                Width = lblWidth,
+                Height = textHeight,
+                Text = "CGI-Mon. Url:",
+                BackColor = this.BackColor
+            };
+
+            this._TxtCgiMonitoringUrl = new NativeTextBox
+            {
+                Location = new Point(rightLeft, top),
+                Width = inputWidth,
+                Height = textHeight
+            };
+            this._TxtCgiMonitoringUrl.Style |= WindowStylesConst.WS_BORDER;
+
+            top += 30;
             this._LinkButton = new NativeLink
             {
                 Location = new Point(leftLeft, top),
@@ -386,8 +516,47 @@ namespace WebAssemblyViewer
             this.Controls.Add(lblMonitoriingPath);
             this.Controls.Add(this._TxtMonitoringPath);
             this.Controls.Add(this._BnSelectMonitoringPath);
+            this.Controls.Add(this._ChkCgiMoitoring);
+            this.Controls.Add(lblCgiMonitoriingPath);
+            this.Controls.Add(this._TxtCgiMonitoringPath);
+            this.Controls.Add(this._BnSelectCgiMonitoringPath);
+            this.Controls.Add(lblCgiExeFile);
+            this.Controls.Add(this._TxtCgiExeFile);
+            this.Controls.Add(this._BnSelectCgiExeFile);
+            this.Controls.Add(lblCgiFileExtension);
+            this.Controls.Add(_TxtCgiFileExtensions);
+            this.Controls.Add(lblCgiMonitoringUrl);
+            this.Controls.Add(_TxtCgiMonitoringUrl);
+            
             this.Controls.Add(this._LinkButton);
             this.Controls.Add(this._BnCancel);
+        }
+
+        private void BnSelectCgiExeFile_Clicked(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                Filter = "*.*\0*.*\0*.exe\0*.exe",
+                DefaultFilterIndex = 2,
+                Title = "Select CGI-EXE"
+                
+            };
+            if (ofd.Show(this))
+            {
+                this._TxtCgiExeFile.Text = ofd.File;
+            }
+        }
+
+        private void BnSelectCgiMonitoringPath_Click(object sender, EventArgs e)
+        {
+            OpenFolderDialog ofd = new OpenFolderDialog
+            {
+                Caption = "Select CGI-Monitoring Path"
+            };
+            if (ofd.Show(this))
+            {
+                this._TxtCgiMonitoringPath.Text = ofd.SelectedPath;
+            }
         }
 
         private void OnLinkClick(object sender, NativeLinkClickEventArgs e)

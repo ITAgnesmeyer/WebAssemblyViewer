@@ -1,4 +1,7 @@
-﻿namespace WebAssemblyViewer
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
+
+namespace WebAssemblyViewer
 {
     public class BrowserOptions
     {
@@ -19,7 +22,11 @@
         public bool DisableF4 { get; set; }
         public bool EnableF4Password { get; set; }
         public string DisableF4Password { get; set; }
-
-        
+        public bool EnableCgi { get; set; }
+        public string CgiMonitoringFolder { get; set; }
+        public string CgiExeFile { get; set; }
+        public string CgiMonitoringUrl { get; set; }
+        [XmlArray]
+        public List<string> CgiFileExtensions { get; set; } = new List<string>();
     }
 }

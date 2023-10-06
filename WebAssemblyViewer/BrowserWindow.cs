@@ -81,6 +81,8 @@ namespace WebAssemblyViewer
                 AutoDock = true
             };
 
+            
+
             this._Browser.WebViewCreated += OnWebWindowCreated;
             this._Browser.ProcessFailed += OnProcessFailed;
             this._Browser.ContentLoading += OnContentLoading;
@@ -304,6 +306,34 @@ namespace WebAssemblyViewer
 
 
             this._Browser.EnableMonitoring = this._Options.Monitoring;
+            if (this._Options.EnableCgi)
+            {
+                if (!File.Exists(this._Options.CgiExeFile))
+                {
+                    string message = ParamErrorHead + "<h3>CgiExeFile must exist!</h3>";
+                    this._Browser.NavigateToString(message);
+                    return;
+                }
+
+                if (!Directory.Exists(this._Options.CgiMonitoringFolder))
+                {
+                    string message = ParamErrorHead + "<h3>Cgi Monitoring Folder must exist!</h3>";
+                    this._Browser.NavigateToString(message);
+                    return;
+                }
+
+                if (!TestUrl(this._Options.CgiMonitoringUrl))
+                {
+                    string message = ParamErrorHead + "<h3>Cgi Monitoring Url must exist</h3>" + ParamErrorUrl;
+                    this._Browser.NavigateToString(message);
+                    return;
+                }
+            }
+            this._Browser.EnableCgi = this._Options.EnableCgi;
+            this._Browser.CgiMoitoringFolder = this._Options.CgiMonitoringFolder;
+            this._Browser.CgiExeFile = this._Options.CgiExeFile;
+            this._Browser.CgiMoitoringUrl = this._Options.CgiMonitoringUrl;
+            this._Browser.CgiFileExtensions = this._Options.CgiFileExtensions.ToArray();
             if (!TestUrl(this._Options.Url))
             {
                 string message = ParamErrorHead + ParamErrorUrl + ParamTable;
