@@ -1,8 +1,11 @@
 ﻿using CoreWindowsWrapper;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using EasyXMLSerializer;
+using String = System.String;
 
 namespace WebAssemblyViewer
 {
@@ -14,9 +17,10 @@ namespace WebAssemblyViewer
         [STAThread]
         static void Main(string[] args)
         {
-            string configFile = "WebAssemblyViewer.cfg";
-
-
+            string configFile =  "WebAssemblyViewer.cfg";
+            string exePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            FileInfo fi = new FileInfo(exePath);
+            configFile = Path.Combine( fi.DirectoryName, configFile );
             ArgOptions argOptions = GetOptions(args);
 
             if (argOptions.ContainsHelp)
@@ -30,8 +34,8 @@ namespace WebAssemblyViewer
             if (argOptions.ContainsConfigFilePath)
             {
                 configFile = argOptions.ConfigFilePath;
-                FileInfo fi = new FileInfo(configFile);
-                if (fi.Directory == null || !fi.Directory.Exists)
+                FileInfo fii = new FileInfo(configFile);
+                if (fii.Directory == null || !fii.Directory.Exists)
                 {
                     MessageBox.Show("The directory of config-File cannot be found!");
                     return;
@@ -76,6 +80,8 @@ namespace WebAssemblyViewer
                 {
                     if (WriteOptions(configFile, opetions))
                     {
+                        //LoadOptions(configFile, out opetions);
+
                         AppMessageBox mg = new AppMessageBox
                         {
                             Caption = "Continue?",
@@ -119,7 +125,7 @@ namespace WebAssemblyViewer
                 TopMost = false,
                 DisableF4 = false,
                 DisableF4Password = string.Empty,
-                CgiFileExtensions = {"php"},
+                CgiFileExtensions = new List<String>(){"php"},
                 CgiMonitoringUrl = "https://localhost:1",
                 CgiExeFile = "c:\\php\\php-cgi.exe",
                 CgiMonitoringFolder = "c:\\temp"
@@ -131,7 +137,10 @@ namespace WebAssemblyViewer
         private static bool LoadOptions(string fileName, out BrowserOptions options)
         {
             EasyXMLSerializer.SerializeTool ser = new EasyXMLSerializer.SerializeTool(fileName);
+            ser.LogEvent += Onlog;
             options = ser.ReadXmlFile<BrowserOptions>(fileName);
+            //FileInfo fi = new FileInfo(fileName);
+            
             if (options == null)
             {
                 if (!string.IsNullOrEmpty(ser.LastError))
@@ -146,11 +155,20 @@ namespace WebAssemblyViewer
             return true;
         }
 
+        private static void Onlog(object sender, LogEventArgs e)
+        {
+            Debug.Print("Log=" + e.Message);
+        }
+
         private static bool WriteOptions(string fileName, BrowserOptions opetions)
         {
             bool retVal = true;
-            EasyXMLSerializer.SerializeTool ser = new EasyXMLSerializer.SerializeTool(fileName);
-            if (!ser.WriteXmlFile(opetions))
+            EasyXMLSerializer.SerializeTool ser = new EasyXMLSerializer.SerializeTool();
+            //if(File.Exists(fileName ))
+            //    File.Delete(fileName);
+            ser.LogEvent += Onlog;
+
+            if (!ser.WriteXmlFile(opetions,fileName))
             {
                 MessageBox.Show(IntPtr.Zero, "Cannot write Options to File:" + fileName + "\n" + ser.LastError,
                     "Options - Error!", MessageBoxOptions.OkOnly | MessageBoxOptions.IconExclamation);

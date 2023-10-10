@@ -26,7 +26,8 @@ namespace WebAssemblyViewer
         public string CgiMonitoringFolder { get; set; }
         public string CgiExeFile { get; set; }
         public string CgiMonitoringUrl { get; set; }
-        [XmlArray]
-        public List<string> CgiFileExtensions { get; set; } = new List<string>();
+        [XmlArray(IsNullable = true)]
+        [XmlArrayItem(typeof(string),ElementName="extension")]
+        public List<string> CgiFileExtensions { get; set; }
     }
 }
