@@ -55,7 +55,7 @@ namespace WebAssemblyViewer
                             MessageBoxOptions.YesNo | MessageBoxOptions.IconQuestion | MessageBoxOptions.DefButton2);
                         if (result == MessageBoxResult.No)
                         {
-                            result = MessageBox.Show(IntPtr.Zero, "Do you want to Edit the Cofig-File?",
+                            result = MessageBox.Show(IntPtr.Zero, "Do you want to Edit the Config-File?",
                                 "Want to edit Config-File?", MessageBoxOptions.OkOnly | MessageBoxOptions.YesNo);
                             if (result == MessageBoxResult.Yes)
                             {
@@ -86,7 +86,7 @@ namespace WebAssemblyViewer
                         {
                             Caption = "Continue?",
                             Message =
-                            "The configuration has been saved.\nDo you want to start the App?\nClick Ok to start the Applicaiton."
+                            "The configuration has been saved.\nDo you want to start the App?\nClick Ok to start the Application."
                         };
                         NativeApp.Run(mg);
                         var result = mg.Result;
